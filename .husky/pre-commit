@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+# Validate *and* fix
+bun run lint:fix
+bun run fmt
+
+git update-index -g
