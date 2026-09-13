@@ -1,11 +1,10 @@
-// import { Container } from "@mantine/core"
 import { Outlet } from "react-router";
-// import { Nav } from "../components/simple-nav"
+import { Nav } from "./components/Nav";
 
 export function Root() {
   return (
     <div>
-      {/* <Nav /> */}
+      <Nav />
       <Outlet />
     </div>
   );

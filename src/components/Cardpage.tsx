@@ -16,7 +16,6 @@ export function Cardpage() {
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
   return (
     <div className="cardpage">
-      <Link to="/">Back</Link>
       {isStillPending && <p>Loading...</p>}
       <h1>{error ? "Error" : data ? data.text : "No data"}</h1>
       <PrettyDate data={data?.date} />

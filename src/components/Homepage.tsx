@@ -27,8 +27,8 @@ export function Homepage() {
                 {i < 5 && <PreloadCard uri={card.uri} />}
                 <h2>
                   <Link to={`/${card.uri}`}>{card.text}</Link>
-                  {card.count_pictures && <small> ({card.count_pictures} pictures)</small>}
                 </h2>
+                {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
 
                 <Link to={`/${card.uri}`}>
                   <img src={card.img} alt={card.text} style={{ width: "99%" }} />
