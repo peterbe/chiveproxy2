@@ -11,7 +11,8 @@
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "serve": "bun run src/serve.ts"
+    "serve": "bun run src/serve.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.102.8",
@@ -23,6 +24,7 @@
     "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "husky": "^9.1.7",
     "oxfmt": "^0.67.0",
     "oxlint": "^1.82.0"
   },
