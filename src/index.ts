@@ -1,8 +1,9 @@
 import { serve } from "bun";
 import index from "./index.html";
 import { LRUCache } from "./lrucache";
-import type { ServerCard, ServerCards } from "./types";
 import { wrapImageUrl } from "./wrapImageUrl";
+
+import type { ServerCard, ServerCards } from "./types";
 
 const cardsCache = new LRUCache<string, ServerCards>({
   maxItems: 50,
@@ -26,9 +27,7 @@ const server = serve({
           return Response.json(cached);
         }
 
-        const response = await fetch(
-          "https://chiveproxy.peterbe.com/api/cards/",
-        );
+        const response = await fetch("https://chiveproxy.peterbe.com/api/cards/");
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }
@@ -51,9 +50,7 @@ const server = serve({
           return Response.json(cached);
         }
 
-        const response = await fetch(
-          `https://chiveproxy.peterbe.com/api/cards/${uri}/`,
-        );
+        const response = await fetch(`https://chiveproxy.peterbe.com/api/cards/${uri}/`);
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }

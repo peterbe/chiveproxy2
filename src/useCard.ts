@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import type { ServerCard } from "./types";
 
 export function useCard(uri: string | number) {

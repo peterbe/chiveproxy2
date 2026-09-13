@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
+import { Cardpage } from "./components/Cardpage";
 import ErrorPage from "./components/error-page";
 import { Homepage } from "./components/Homepage";
-import { Cardpage } from "./components/Cardpage";
 import { Root } from "./root";
 
 export const router = createBrowserRouter([

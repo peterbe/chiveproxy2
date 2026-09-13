@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import type { ServerCards } from "./types";
 
 const isProd = process.env.NODE_ENV === "production";

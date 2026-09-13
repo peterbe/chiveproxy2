@@ -1,6 +1,5 @@
 // import { Button, Code, Container, Text, Title } from "@mantine/core"
 import { useEffect } from "react";
-
 import { isRouteErrorResponse, Link, useRouteError, useSearchParams } from "react-router";
 
 export default function ErrorPage() {

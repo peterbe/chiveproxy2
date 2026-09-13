@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router";
 import { useCard } from "../useCard";
-import { useDocumentTitle } from "@/useDocumentTitle";
-import type { CardPicture } from "@/types";
-import { ReloadAlert } from "./ReloadAlert";
-import { useSlowTruth } from "@/useSlowTruth";
 import { PrettyDate } from "./PrettyDate";
+import { ReloadAlert } from "./ReloadAlert";
+import { useDocumentTitle } from "@/useDocumentTitle";
+import { useSlowTruth } from "@/useSlowTruth";
+
+import type { CardPicture } from "@/types";
 
 export function Cardpage() {
   const params = useParams();
@@ -12,9 +13,7 @@ export function Cardpage() {
 
   const { data, isPending, isLoading, error } = useCard(uri);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
-  useDocumentTitle(
-    isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy",
-  );
+  useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
   return (
     <div className="cardpage">
       <Link to="/">Back</Link>
@@ -34,11 +33,7 @@ function List({ pictures }: { pictures: CardPicture[] }) {
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`} style={{ marginBottom: 40 }}>
           <Link to={`/${picture.img}`}>
-            <img
-              src={picture.img}
-              alt={picture.caption}
-              style={{ width: "99%" }}
-            />
+            <img src={picture.img} alt={picture.caption} style={{ width: "99%" }} />
           </Link>
           <p>{picture.caption}</p>
         </article>

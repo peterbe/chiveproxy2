@@ -43,7 +43,3 @@ export function useSlowTruth(initialState: boolean, { delay = 1000 }: Options) {
   }, [initialState, delay]);
   return isTrue;
 }
-
-
-
-

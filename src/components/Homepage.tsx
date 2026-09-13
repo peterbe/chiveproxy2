@@ -1,9 +1,9 @@
 import { Link } from "react-router";
+import logo from "../kcco.svg";
 import { useCards } from "./../useCards";
-import { useDocumentTitle } from "@/useDocumentTitle";
-import { useCard } from "@/useCard";
 import { ReloadAlert } from "./ReloadAlert";
-import logo from "./kcco.png";
+import { useCard } from "@/useCard";
+import { useDocumentTitle } from "@/useDocumentTitle";
 import { useSlowTruth } from "@/useSlowTruth";
 
 export function Homepage() {
@@ -28,7 +28,7 @@ export function Homepage() {
                 <h2>
                   <Link to={`/${card.uri}`}>{card.text}</Link>
                   {card.count_pictures && (
-                    <small>({card.count_pictures})</small>
+                    <small> ({card.count_pictures} pictures)</small>
                   )}
                 </h2>
 
