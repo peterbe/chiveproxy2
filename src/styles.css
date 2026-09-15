@@ -1,3 +1,19 @@
+.grid-pictures {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.grid-pictures a {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.grid-pictures a img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
 /* Global Reset */
 * {
   margin: 0;

@@ -28,7 +28,7 @@ export function Cardpage() {
 
 function List({ pictures }: { pictures: CardPicture[] }) {
   return (
-    <div>
+    <div className="list-pictures">
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`} style={{ marginBottom: 40 }}>
           <Link to={`/${picture.img}`}>
@@ -43,7 +43,7 @@ function List({ pictures }: { pictures: CardPicture[] }) {
 
 function Grid({ pictures }: { pictures: CardPicture[] }) {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", marginBottom: 100 }}>
+    <div className="grid-pictures">
       {pictures.map((picture, i) => (
         <a
           key={picture.img}
