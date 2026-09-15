@@ -15,7 +15,7 @@ export function Homepage() {
   return (
     <div className="homepage">
       <p style={{ textAlign: "center" }}>
-        <img src={logo} alt="Chive" style={{ width: "50%" }} />
+        <img src={logo} alt="Chive" style={{ width: "50%", maxWidth: 300 }} />
       </p>
       {isStillPending && <p>Loading...</p>}
       {error && <ReloadAlert error={error} />}
