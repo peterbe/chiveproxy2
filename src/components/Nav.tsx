@@ -10,7 +10,7 @@ export function Nav() {
     <nav className="navbar">
       <ul className="nav-links">
         <li>
-          <Link to="/" className="pure-button-primary">
+          <Link to="/" className="pure-button-primary" viewTransition>
             Home
           </Link>
         </li>
