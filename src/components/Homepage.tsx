@@ -22,11 +22,13 @@ export function Homepage() {
               <article key={card.id} style={{ marginBottom: 60 }}>
                 {i < 5 && <PreloadCard uri={card.uri} />}
                 <h2>
-                  <Link to={`/${card.uri}`}>{card.text}</Link>
+                  <Link to={`/${card.uri}`} viewTransition>
+                    {card.text}
+                  </Link>
                 </h2>
                 {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
 
-                <Link to={`/${card.uri}`}>
+                <Link to={`/${card.uri}`} viewTransition>
                   <img src={card.img} alt={card.text} style={{ width: "99%" }} />
                 </Link>
                 <p>{card.human_time}</p>

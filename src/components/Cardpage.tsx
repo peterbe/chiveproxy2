@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useCard } from "../useCard";
 import { PrettyDate } from "./PrettyDate";
 import { ReloadAlert } from "./ReloadAlert";
@@ -31,9 +31,7 @@ function List({ pictures }: { pictures: CardPicture[] }) {
     <div className="list-pictures">
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`} style={{ marginBottom: 40 }}>
-          <Link to={`/${picture.img}`}>
-            <img src={picture.img} alt={picture.caption} style={{ width: "99%" }} />
-          </Link>
+          <img src={picture.img} alt={picture.caption} style={{ width: "99%" }} />
           <p>{picture.caption}</p>
         </article>
       ))}
