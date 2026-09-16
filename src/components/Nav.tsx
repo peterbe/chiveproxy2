@@ -10,23 +10,19 @@ export function Nav() {
     <nav className="navbar">
       <ul className="nav-links">
         <li>
-          <Link to="/" className="pure-button pure-button-primary">
+          <Link to="/" className="pure-button-primary">
             Home
           </Link>
         </li>
 
         <li>
           {uri ? (
-            <button
-              className="pure-button button-secondary"
-              type="button"
-              onClick={() => navigate(-1)}
-            >
+            <button className="button-secondary" type="button" onClick={() => navigate(-1)}>
               Back
             </button>
           ) : (
             <button
-              className="pure-button button-warning"
+              className="button-warning"
               type="button"
               onClick={() => window.location.reload()}
             >
@@ -37,7 +33,7 @@ export function Nav() {
         {hasScrolledDown && (
           <li>
             <button
-              className="pure-button button-success"
+              className="button-success"
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
@@ -48,7 +44,7 @@ export function Nav() {
         {uri && (
           <li>
             <button
-              className="pure-button button-primary"
+              className="button-primary"
               type="button"
               onClick={async () => {
                 try {

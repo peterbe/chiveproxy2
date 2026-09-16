@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import logo from "../kcco.svg";
 import { useCards } from "./../useCards";
 import { ReloadAlert } from "./ReloadAlert";
 import { useCard } from "@/useCard";
@@ -14,9 +13,6 @@ export function Homepage() {
 
   return (
     <div className="homepage">
-      <p style={{ textAlign: "center" }}>
-        <img src={logo} alt="Chive" style={{ width: "50%", maxWidth: 300 }} />
-      </p>
       {isStillPending && <p>Loading...</p>}
       {error && <ReloadAlert error={error} />}
       {data && (
