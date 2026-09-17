@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
 
 import type { ServerCard } from "./types";
-import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
 
 const cardCache = new LocalStorageLRUCache<string, ServerCard>(
   "chiveproxy2:card",
@@ -29,8 +29,7 @@ export function useCard(uri: string | number) {
         console.log("CACHE HIT", uri);
         const typed = cached as ServerCard;
         if (typed._cacheInfo) {
-          const ageSeconds =
-            (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
+          const ageSeconds = (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
           console.log("IT WAS IN THE CACHE", { ageSeconds });
           if (ageSeconds > 60) {
             backgroundRefresh(uri);

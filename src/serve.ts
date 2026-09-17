@@ -7,9 +7,7 @@ Bun.serve({
   routes: {
     "/api/cards": {
       async GET() {
-        const response = await fetch(
-          "https://chiveproxy.peterbe.com/api/cards/",
-        );
+        const response = await fetch("https://chiveproxy.peterbe.com/api/cards/");
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }
@@ -25,9 +23,7 @@ Bun.serve({
     "/api/cards/:uri": {
       async GET(req) {
         const uri = req.params.uri;
-        const response = await fetch(
-          `https://chiveproxy.peterbe.com/api/cards/${uri}/`,
-        );
+        const response = await fetch(`https://chiveproxy.peterbe.com/api/cards/${uri}/`);
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }

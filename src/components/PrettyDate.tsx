@@ -26,10 +26,7 @@ export function PrettyDate({ date }: { date?: string }) {
   return <p>{prettyPrintDate(date)}</p>;
 }
 
-export function prettyPrintDate(
-  date: string,
-  { withDate = true }: { withDate?: boolean } = {},
-) {
+export function prettyPrintDate(date: string, { withDate = true }: { withDate?: boolean } = {}) {
   const parsedDate = new Date(date);
   const ageSeconds = (Date.now() - parsedDate.getTime()) / 1000;
   return `${withDate ? parsedDate.toLocaleDateString() + " - " : ""}${humanizeSeconds(ageSeconds)} ago`;
