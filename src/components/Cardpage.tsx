@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { useCard } from "../useCard";
+import { CachedInfo } from "./CachedInfo";
 import { PrettyDate } from "./PrettyDate";
 import { ReloadAlert } from "./ReloadAlert";
 import { useDocumentTitle } from "@/useDocumentTitle";
@@ -17,8 +18,9 @@ export function Cardpage() {
   return (
     <div className="cardpage">
       {isStillPending && <p>Loading...</p>}
-      <h1>{error ? "Error" : data ? data.text : "No data"}</h1>
-      <PrettyDate data={data?.date} />
+      {data && <h1>{data.text}</h1>}
+      <PrettyDate date={data?.date} />
+      <CachedInfo data={data?._cacheInfo} />
       {error && <ReloadAlert error={error} />}
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}

@@ -5,7 +5,6 @@ import type { ServerCard, ServerCards } from "./types";
 Bun.serve({
   port: 3000,
   routes: {
-    "/*": { dir: "./dist" },
     "/api/cards": {
       async GET() {
         const response = await fetch("https://chiveproxy.peterbe.com/api/cards/");
@@ -37,6 +36,7 @@ Bun.serve({
         return Response.json(data);
       },
     },
+    "/*": { dir: "./dist" },
   },
 });
 

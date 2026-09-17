@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useCards } from "./../useCards";
+import { CachedInfo } from "./CachedInfo";
 import { ReloadAlert } from "./ReloadAlert";
 import { useCard } from "@/useCard";
 import { useDocumentTitle } from "@/useDocumentTitle";
@@ -15,6 +16,7 @@ export function Homepage() {
     <div className="homepage">
       {isStillPending && <p>Loading...</p>}
       {error && <ReloadAlert error={error} />}
+      <CachedInfo data={data?._cacheInfo} />
       {data && (
         <div>
           {data.cards.map((card, i) => {

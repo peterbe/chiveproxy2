@@ -20,14 +20,14 @@ export function humanizeSeconds(totalSeconds: number) {
   return "0 seconds";
 }
 
-export function PrettyDate({ data }: { data?: string }) {
-  if (!data) return null;
-  const date = new Date(data);
-  const ageSeconds = (Date.now() - date.getTime()) / 1000;
+export function PrettyDate({ date }: { date?: string }) {
+  if (!date) return null;
 
-  return (
-    <p>
-      {date.toLocaleDateString()} - {humanizeSeconds(ageSeconds)} ago
-    </p>
-  );
+  return <p>{prettyPrintDate(date)}</p>;
+}
+
+export function prettyPrintDate(date: string, { withDate = true }: { withDate?: boolean } = {}) {
+  const parsedDate = new Date(date);
+  const ageSeconds = (Date.now() - parsedDate.getTime()) / 1000;
+  return `${withDate ? parsedDate.toLocaleDateString() + " - " : ""}${humanizeSeconds(ageSeconds)} ago`;
 }
