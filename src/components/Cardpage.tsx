@@ -6,6 +6,7 @@ import { useDocumentTitle } from "@/useDocumentTitle";
 import { useSlowTruth } from "@/useSlowTruth";
 
 import type { CardPicture } from "@/types";
+import { CachedInfo } from "./CachedInfo";
 
 export function Cardpage() {
   const params = useParams();
@@ -13,12 +14,15 @@ export function Cardpage() {
 
   const { data, isPending, isLoading, error } = useCard(uri);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
-  useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
+  useDocumentTitle(
+    isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy",
+  );
   return (
     <div className="cardpage">
       {isStillPending && <p>Loading...</p>}
-      <h1>{error ? "Error" : data ? data.text : "No data"}</h1>
-      <PrettyDate data={data?.date} />
+      {data && <h1>{data.text}</h1>}
+      <PrettyDate date={data?.date} />
+      <CachedInfo data={data?._cacheInfo} />
       {error && <ReloadAlert error={error} />}
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}
@@ -31,7 +35,11 @@ function List({ pictures }: { pictures: CardPicture[] }) {
     <div className="list-pictures">
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`} style={{ marginBottom: 40 }}>
-          <img src={picture.img} alt={picture.caption} style={{ width: "99%" }} />
+          <img
+            src={picture.img}
+            alt={picture.caption}
+            style={{ width: "99%" }}
+          />
           <p>{picture.caption}</p>
         </article>
       ))}

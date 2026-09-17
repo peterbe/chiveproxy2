@@ -16,9 +16,6 @@ const cardCache = new LRUCache<string, ServerCard>({
 
 const server = serve({
   routes: {
-    // Serve index.html for all unmatched routes.
-    "/*": index,
-
     "/api/cards": {
       async GET() {
         const cacheKey = "cards";
@@ -27,7 +24,9 @@ const server = serve({
           return Response.json(cached);
         }
 
-        const response = await fetch("https://chiveproxy.peterbe.com/api/cards/");
+        const response = await fetch(
+          "https://chiveproxy.peterbe.com/api/cards/",
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }
@@ -50,7 +49,9 @@ const server = serve({
           return Response.json(cached);
         }
 
-        const response = await fetch(`https://chiveproxy.peterbe.com/api/cards/${uri}/`);
+        const response = await fetch(
+          `https://chiveproxy.peterbe.com/api/cards/${uri}/`,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch cards");
         }
@@ -64,6 +65,9 @@ const server = serve({
         return Response.json(data);
       },
     },
+
+    // Serve index.html for all unmatched routes.
+    "/*": index,
   },
 
   development: process.env.NODE_ENV !== "production" && {

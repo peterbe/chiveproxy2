@@ -9,9 +9,15 @@ type Card = {
   uri: number;
 };
 
+export type CacheInfo = {
+  created: string;
+  hit: boolean;
+};
+
 export type ServerCards = {
   cards: Card[];
   _oldest_card: string;
+  _cacheInfo?: CacheInfo;
 };
 
 export type CardPicture = {
@@ -27,4 +33,5 @@ export type ServerCard = {
   text: string;
   date: string;
   pictures: CardPicture[];
+  _cacheInfo?: CacheInfo;
 };

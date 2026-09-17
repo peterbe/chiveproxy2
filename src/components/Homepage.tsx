@@ -4,6 +4,7 @@ import { ReloadAlert } from "./ReloadAlert";
 import { useCard } from "@/useCard";
 import { useDocumentTitle } from "@/useDocumentTitle";
 import { useSlowTruth } from "@/useSlowTruth";
+import { CachedInfo } from "./CachedInfo";
 
 export function Homepage() {
   const { data, isPending, error } = useCards();
@@ -15,6 +16,7 @@ export function Homepage() {
     <div className="homepage">
       {isStillPending && <p>Loading...</p>}
       {error && <ReloadAlert error={error} />}
+      <CachedInfo data={data?._cacheInfo} />
       {data && (
         <div>
           {data.cards.map((card, i) => {
@@ -26,10 +28,16 @@ export function Homepage() {
                     {card.text}
                   </Link>
                 </h2>
-                {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
+                {card.count_pictures && (
+                  <small>({card.count_pictures} pictures)</small>
+                )}
 
                 <Link to={`/${card.uri}`} viewTransition>
-                  <img src={card.img} alt={card.text} style={{ width: "99%" }} />
+                  <img
+                    src={card.img}
+                    alt={card.text}
+                    style={{ width: "99%" }}
+                  />
                 </Link>
                 <p>{card.human_time}</p>
               </article>
