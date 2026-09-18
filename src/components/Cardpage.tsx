@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useCard } from "../useCard";
 import { CachedInfo } from "./CachedInfo";
+import { Loading } from "./Loading";
 import { PrettyDate } from "./PrettyDate";
 import { ReloadAlert } from "./ReloadAlert";
 import { useDocumentTitle } from "@/useDocumentTitle";
@@ -17,7 +18,7 @@ export function Cardpage() {
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
   return (
     <div className="cardpage">
-      {isStillPending && <p>Loading...</p>}
+      {isStillPending && <Loading />}
       {data && <h1>{data.text}</h1>}
       <PrettyDate date={data?.date} />
       <CachedInfo data={data?._cacheInfo} />
