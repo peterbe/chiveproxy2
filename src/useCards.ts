@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
+import { wrapImageUrl } from "./wrapImageUrl";
 
 import type { ServerCards } from "./types";
 
@@ -12,11 +13,16 @@ const cardCache = new LocalStorageLRUCache<string, ServerCards>(
 const isProd = process.env.NODE_ENV === "production";
 
 async function backgroundRefresh() {
-  const res = await fetch(`/api/cards`);
+  const res = await fetch(`/api/cards/`);
   if (!res.ok) {
     console.error("Failed to fetch card in background");
   } else {
-    const data = await res.json();
+    const data = (await res.json()) as ServerCards;
+    for (const card of data.cards) {
+      if (card.img.startsWith("https://thechive.com")) {
+        card.img = wrapImageUrl(card.img);
+      }
+    }
     data._cacheInfo = { created: new Date().toISOString(), hit: false };
     cardCache.set(`cards`, data);
   }
@@ -43,11 +49,17 @@ export function useCards() {
         return typed;
       }
 
-      const res = await fetch("/api/cards");
+      const res = await fetch("/api/cards/");
       if (!res.ok) {
         throw new Error("Failed to fetch cards");
       }
-      const data = await res.json();
+      const data = (await res.json()) as ServerCards;
+      for (const card of data.cards) {
+        if (card.img.startsWith("https://thechive.com")) {
+          card.img = wrapImageUrl(card.img);
+        }
+      }
+
       data._cacheInfo = { created: new Date().toISOString(), hit: false };
       cardCache.set("cards", data);
       console.log("CACHE MISS");

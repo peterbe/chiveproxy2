@@ -1,34 +1,39 @@
 {
-  "name": "bun-react-template",
-  "version": "0.1.0",
+  "name": "chiveproxy2",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.ts",
-    "build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
-    "start": "NODE_ENV=production bun src/index.ts",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "preview": "vite preview",
     "serve": "bun run src/serve.ts",
     "prepare": "husky"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.102.8",
-    "react": "^19",
-    "react-dom": "^19",
-    "react-router": "^8.3.1"
+    "@tanstack/react-query": "^5.103.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router": "^8.4.0"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@babel/core": "^7.29.7",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "babel-plugin-react-compiler": "^1.0.0",
     "husky": "^9.1.7",
-    "oxfmt": "^0.67.0",
-    "oxlint": "^1.82.0"
-  },
-  "peerDependencies": {
-    "typescript": "^7"
+    "oxfmt": "^0.68.0",
+    "oxlint": "^1.81.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
   }
 }
