@@ -20,6 +20,9 @@ jobs:
         id: dev-server
         background: true
         run: bun run dev
-
+      - name: Wait for Dev server
+        run: sleep 1
+      - name: Test Dev server
+        run: curl --fail --retry-connrefused --retry 3 http://localhost:5173
       - name: Stop API Server
         cancel: dev-server
