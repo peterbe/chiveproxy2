@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
-import { wrapImageUrl } from "./wrapImageUrl";
+import { wrapPicture } from "./wrapImageUrl";
 
 import type { ServerCard } from "./types";
 
@@ -17,9 +17,7 @@ async function backgroundRefresh(uri: string | number) {
   } else {
     const data = (await res.json()) as ServerCard;
     for (const picture of data.pictures) {
-      if (picture.img.startsWith("https://thechive.com")) {
-        picture.img = wrapImageUrl(picture.img);
-      }
+      wrapPicture(picture);
     }
     data._cacheInfo = { created: new Date().toISOString(), hit: false };
     cardCache.set(`card:${uri}`, data);
@@ -62,9 +60,7 @@ export function useCard(uri: string | number) {
       }
       const data = (await res.json()) as ServerCard;
       for (const picture of data.pictures) {
-        if (picture.img.startsWith("https://thechive.com")) {
-          picture.img = wrapImageUrl(picture.img);
-        }
+        wrapPicture(picture);
       }
       data._cacheInfo = { created: new Date().toISOString(), hit: false };
       cardCache.set(`card:${uri}`, data);
