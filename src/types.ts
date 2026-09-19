@@ -20,6 +20,13 @@ export type ServerCards = {
   _cacheInfo?: CacheInfo;
 };
 
+export type ServerSearchCards = ServerCards & {
+  search: {
+    string: string;
+    count: number;
+  };
+};
+
 export type CardPicture = {
   img: string;
   gifsrc: string | null;
