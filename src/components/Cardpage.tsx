@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
-import { useCard } from "../useCard";
+import { Card404, useCard } from "../useCard";
 import { CachedInfo } from "./CachedInfo";
+import styles from "./Cardpage.module.css";
+import { Custom404 } from "./Errorpage";
 import { Loading } from "./Loading";
 import { PrettyDate } from "./PrettyDate";
 import { ReloadAlert } from "./ReloadAlert";
@@ -16,6 +18,9 @@ export function Cardpage() {
   const { data, isPending, isLoading, error } = useCard(uri);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
+  if (error && error instanceof Card404) {
+    return <Custom404 />;
+  }
   return (
     <div className="cardpage">
       {isStillPending && <Loading />}
@@ -29,22 +34,9 @@ export function Cardpage() {
   );
 }
 
-function List({ pictures }: { pictures: CardPicture[] }) {
-  return (
-    <div className="list-pictures">
-      {pictures.map((picture, i) => (
-        <article key={picture.img} id={`img${i}`} style={{ marginBottom: 40 }}>
-          <img src={picture.img} alt={picture.caption} style={{ width: "99%" }} />
-          <p>{picture.caption}</p>
-        </article>
-      ))}
-    </div>
-  );
-}
-
 function Grid({ pictures }: { pictures: CardPicture[] }) {
   return (
-    <div className="grid-pictures">
+    <div className={styles.gridPictures}>
       {pictures.map((picture, i) => (
         <a
           key={picture.img}
@@ -57,12 +49,21 @@ function Grid({ pictures }: { pictures: CardPicture[] }) {
             }
           }}
         >
-          <img
-            src={picture.img}
-            alt={picture.caption}
-            style={{ maxWidth: 75, marginRight: 10, marginBottom: 10 }}
-          />
+          <img src={picture.img} alt={picture.caption} />
         </a>
+      ))}
+    </div>
+  );
+}
+
+function List({ pictures }: { pictures: CardPicture[] }) {
+  return (
+    <div className={styles.listPictures}>
+      {pictures.map((picture, i) => (
+        <article key={picture.img} id={`img${i}`}>
+          <img src={picture.img} alt={picture.caption} />
+          <p>{picture.caption}</p>
+        </article>
       ))}
     </div>
   );

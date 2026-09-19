@@ -1,0 +1,12 @@
+.listCards {
+  padding: 5px;
+  margin-top: 20px;
+
+  article {
+    margin-bottom: 40px;
+  }
+  img {
+    width: 98%;
+    text-align: center;
+  }
+}

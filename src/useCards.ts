@@ -7,10 +7,8 @@ import type { ServerCards } from "./types";
 const cardCache = new LocalStorageLRUCache<string, ServerCards>(
   "chiveproxy2:cards",
   1,
-  1000 * 60 * 60 * 24, // TODO: bump up
+  1000 * 60 * 60 * 1,
 );
-
-const isProd = process.env.NODE_ENV === "production";
 
 async function backgroundRefresh() {
   const res = await fetch(`/api/cards/`);
@@ -67,6 +65,6 @@ export function useCards() {
     },
     refetchIntervalInBackground: true,
     refetchInterval: 60000, // Refetch every 60 seconds
-    refetchOnWindowFocus: isProd,
+    refetchOnWindowFocus: process.env.NODE_ENV !== "production",
   });
 }

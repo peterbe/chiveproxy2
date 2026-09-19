@@ -1,3 +1,26 @@
-.listPicture {
-  width: 99%;
+.gridPictures {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.gridPictures a {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.gridPictures a img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.listPictures {
+  article {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  img {
+    width: 98%;
+  }
 }

@@ -26,6 +26,13 @@ async function backgroundRefresh(uri: string | number) {
   }
 }
 
+export class Card404 extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "Error404";
+  }
+}
+
 export function useCard(uri: string | number) {
   return useQuery<ServerCard>({
     queryKey: ["card", uri],
@@ -48,6 +55,9 @@ export function useCard(uri: string | number) {
       }
       const res = await fetch(`/api/cards/${uri}/`);
       if (!res.ok) {
+        if (res.status === 404) {
+          throw new Card404(`/api/cards/${uri}/`);
+        }
         throw new Error("Failed to fetch cards");
       }
       const data = (await res.json()) as ServerCard;
@@ -61,7 +71,8 @@ export function useCard(uri: string | number) {
       console.log("CACHE MISS", uri);
       return data;
     },
-    refetchOnWindowFocus: process.env.NODE_ENV === "production",
+    refetchOnWindowFocus: process.env.NODE_ENV !== "production",
     staleTime: 1000 * 60 * 5,
+    retry: 2,
   });
 }
