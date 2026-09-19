@@ -1,6 +1,6 @@
-// import { Button, Code, Container, Text, Title } from "@mantine/core"
 import { useEffect } from "react";
 import { isRouteErrorResponse, Link, useRouteError, useSearchParams } from "react-router";
+import styles from "./Errorpage.module.css";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -34,25 +34,25 @@ export default function ErrorPage() {
   }
 
   return (
-    <div>
+    <div className={styles.errorPage}>
       <h1>Error!</h1>
       <p>Some sort of error was thrown during the rendering.</p>
       {error instanceof Error ? (
-        <p style={{ textAlign: "center" }}>
+        <p className={styles.errorMessage}>
           Error message: <code>{error.message}</code>
         </p>
       ) : (
-        <p style={{ textAlign: "center" }}>Error unknown. See console logs.</p>
+        <p className={styles.errorMessage}>Error unknown. See console logs.</p>
       )}
     </div>
   );
 }
 
-function Custom404() {
+export function Custom404() {
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>404 Page not found</h1>
-      <p style={{ textAlign: "center" }}>
+    <div className={styles.errorPage}>
+      <h1>Page not found</h1>
+      <p className={styles.linkBack}>
         <Link to="/">Take me back to home page</Link>
       </p>
     </div>

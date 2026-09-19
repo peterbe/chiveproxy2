@@ -1,4 +1,4 @@
-type Card = {
+export type Card = {
   text: string;
   img: string;
   url: string;

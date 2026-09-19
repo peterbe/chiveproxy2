@@ -1,0 +1,14 @@
+.errorPage {
+  margin: 100px;
+  h1 {
+    text-align: center;
+  }
+}
+
+.errorMessage {
+  text-align: center;
+}
+
+.linkBack {
+  text-align: center;
+}

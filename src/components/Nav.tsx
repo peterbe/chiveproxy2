@@ -1,4 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router";
+import styles from "./Nav.module.css";
 import { useScrollDetection } from "@/useScrollDetection";
 
 export function Nav() {
@@ -7,46 +8,48 @@ export function Nav() {
   const uri = params.uri;
   const hasScrolledDown = useScrollDetection();
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
+    <nav className={styles.navbar}>
+      <ul className={styles.navLinks}>
         <li>
-          <Link to="/" className="pure-button-primary" viewTransition>
+          <Link to="/" className={styles.standardButton} viewTransition>
             Home
           </Link>
         </li>
 
         <li>
           {uri ? (
-            <button className="button-secondary" type="button" onClick={() => navigate(-1)}>
+            <Link
+              to="/"
+              className={styles.standardButton}
+              onClick={(event) => {
+                event.preventDefault();
+                navigate(-1);
+              }}
+            >
               Back
-            </button>
+            </Link>
           ) : (
-            <button
-              className="button-warning"
+            <Link
+              to={window.location.href}
+              className={styles.standardButton}
               type="button"
-              onClick={() => window.location.reload()}
+              onClick={(event) => {
+                event.preventDefault();
+                window.location.reload();
+              }}
             >
               Reload
-            </button>
+            </Link>
           )}
         </li>
-        {hasScrolledDown && (
-          <li>
-            <button
-              className="button-success"
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Top
-            </button>
-          </li>
-        )}
+
         {uri && (
           <li>
-            <button
-              className="button-primary"
-              type="button"
-              onClick={async () => {
+            <Link
+              to={window.location.href}
+              className={styles.standardButton}
+              onClick={async (event) => {
+                event.preventDefault();
                 try {
                   await navigator.share({ url: window.location.href });
                 } catch (error) {
@@ -55,7 +58,22 @@ export function Nav() {
               }}
             >
               Share
-            </button>
+            </Link>
+          </li>
+        )}
+        {hasScrolledDown && (
+          <li>
+            <Link
+              to={window.location.href}
+              className={styles.standardButton}
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              Top
+            </Link>
           </li>
         )}
       </ul>
