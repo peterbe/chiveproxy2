@@ -19,6 +19,9 @@
     margin-bottom: 40px;
     text-align: center;
   }
+  video {
+    width: 100%;
+  }
 
   img {
     width: 98%;

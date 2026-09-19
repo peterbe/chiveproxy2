@@ -1,7 +1,7 @@
 import { serve } from "bun";
 import index from "./index.html";
 import { LRUCache } from "./lrucache";
-import { wrapImageUrl } from "./wrapImageUrl";
+import { wrapCard, wrapPicture } from "./wrapImageUrl";
 
 import type { ServerCard, ServerCards } from "./types";
 
@@ -30,9 +30,7 @@ const server = serve({
         }
         const data = (await response.json()) as ServerCards;
         for (const card of data.cards) {
-          if (card.img.startsWith("https://thechive.com")) {
-            card.img = wrapImageUrl(card.img);
-          }
+          wrapCard(card);
         }
         cardsCache.set(cacheKey, data);
         return Response.json(data);
@@ -53,9 +51,7 @@ const server = serve({
         }
         const data = (await response.json()) as ServerCard;
         for (const picture of data.pictures) {
-          if (picture.img.startsWith("https://thechive.com")) {
-            picture.img = wrapImageUrl(picture.img);
-          }
+          wrapPicture(picture);
         }
         cardCache.set(cacheKey, data);
         return Response.json(data);

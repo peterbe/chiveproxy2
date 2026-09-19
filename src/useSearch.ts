@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { wrapImageUrl } from "./wrapImageUrl";
+import { wrapCard } from "./wrapImageUrl";
 
 import type { ServerSearchCards } from "./types";
 
@@ -13,9 +13,7 @@ export function useSearch(q: string) {
       }
       const data = (await res.json()) as ServerSearchCards;
       for (const card of data.cards) {
-        if (card.img.startsWith("https://thechive.com")) {
-          card.img = wrapImageUrl(card.img);
-        }
+        wrapCard(card);
       }
 
       return data;

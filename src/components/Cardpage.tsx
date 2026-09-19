@@ -16,6 +16,7 @@ export function Cardpage() {
   const uri = params.uri as string;
 
   const { data, isPending, isLoading, error } = useCard(uri);
+  console.log(data);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
   if (error && error instanceof Card404) {
@@ -61,7 +62,12 @@ function List({ pictures }: { pictures: CardPicture[] }) {
     <div className={styles.listPictures}>
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`}>
-          <img src={picture.img} alt={picture.caption} />
+          {picture.mp4src ? (
+            <video src={picture.mp4src} controls muted />
+          ) : (
+            <img src={picture.img} alt={picture.caption} />
+          )}
+
           <p>{picture.caption}</p>
         </article>
       ))}
