@@ -20,22 +20,6 @@ function humanizeSeconds(totalSeconds: number) {
   return "0 seconds";
 }
 
-// export function PrettyDate({ date }: { date?: string }) {
-//   if (!date) return null;
-
-//   return (
-//     <p>
-//       <PrettyPrintDate date={date} />
-//     </p>
-//   );
-// }
-
-// export function prettyPrintDate(date: string, { withDate = true }: { withDate?: boolean } = {}) {
-//   const parsedDate = new Date(date);
-//   const ageSeconds = (Date.now() - parsedDate.getTime()) / 1000;
-//   return `${withDate ? parsedDate.toLocaleDateString() + " - " : ""}${humanizeSeconds(ageSeconds)} ago`;
-// }
-
 export function PrettyPrintDate({ date, withDate = true }: { date: string; withDate?: boolean }) {
   const parsedDate = new Date(date);
   const ageSeconds = getAgeSeconds(date);
