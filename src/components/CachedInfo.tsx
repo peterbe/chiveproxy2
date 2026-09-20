@@ -1,4 +1,4 @@
-import { prettyPrintDate } from "./PrettyDate";
+import { PrettyPrintDate } from "./PrettyDate";
 
 import type { CacheInfo } from "@/types";
 
@@ -8,7 +8,7 @@ export function CachedInfo({ data }: { data?: CacheInfo }) {
     <div className="cache-info">
       {data.hit && (
         <p>
-          Cache <b>hit</b> from {prettyPrintDate(data.created, { withDate: false })}
+          Cache <b>hit</b> from <PrettyPrintDate date={data.created} withDate={false} />
         </p>
       )}
       {!data.hit && (

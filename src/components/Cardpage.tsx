@@ -4,8 +4,9 @@ import { CachedInfo } from "./CachedInfo";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
 import { Loading } from "./Loading";
-import { PrettyDate } from "./PrettyDate";
+import { PrettyPrintDate } from "./PrettyDate";
 import { ReloadAlert } from "./ReloadAlert";
+import { useIsSafari } from "./useIsSafari";
 import { useDocumentTitle } from "@/useDocumentTitle";
 import { useSlowTruth } from "@/useSlowTruth";
 
@@ -16,7 +17,6 @@ export function Cardpage() {
   const uri = params.uri as string;
 
   const { data, isPending, isLoading, error } = useCard(uri);
-  console.log(data);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
   if (error && error instanceof Card404) {
@@ -26,7 +26,7 @@ export function Cardpage() {
     <div className="cardpage">
       {isStillPending && <Loading />}
       {data && <h1>{data.text}</h1>}
-      <PrettyDate date={data?.date} />
+      {data?.date && <PrettyPrintDate date={data?.date} />}
       <CachedInfo data={data?._cacheInfo} />
       {error && <ReloadAlert error={error} />}
       {data && <Grid pictures={data.pictures} />}
@@ -58,12 +58,18 @@ function Grid({ pictures }: { pictures: CardPicture[] }) {
 }
 
 function List({ pictures }: { pictures: CardPicture[] }) {
+  const isSafari = useIsSafari();
   return (
     <div className={styles.listPictures}>
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`}>
           {picture.mp4src ? (
-            <video src={picture.mp4src} controls muted />
+            isSafari ? (
+              // <video src={picture.mp4src} controls muted />
+              <img src={picture.mp4src} alt={picture.caption} />
+            ) : (
+              <video src={picture.mp4src} controls muted autoPlay />
+            )
           ) : (
             <img src={picture.img} alt={picture.caption} />
           )}
