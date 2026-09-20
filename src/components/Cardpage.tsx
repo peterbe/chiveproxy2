@@ -5,6 +5,8 @@ import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
 import { Loading } from "./Loading";
 import { PrettyPrintDate } from "./PrettyDate";
+import { PrettyPicture } from "./PrettyPicture";
+import { PrettyVideo } from "./PrettyVideo";
 import { ReloadAlert } from "./ReloadAlert";
 import { useIsSafari } from "./useIsSafari";
 import { useDocumentTitle } from "@/useDocumentTitle";
@@ -66,12 +68,19 @@ function List({ pictures }: { pictures: CardPicture[] }) {
           {picture.mp4src ? (
             isSafari ? (
               // <video src={picture.mp4src} controls muted />
-              <img src={picture.mp4src} alt={picture.caption} />
+              // <img src={picture.mp4src} alt={picture.caption} />
+              <PrettyPicture src={picture.mp4src} alt={picture.caption} />
             ) : (
-              <video src={picture.mp4src} controls muted autoPlay />
+              <PrettyVideo src={picture.mp4src} />
+              // <video
+              //   src={picture.mp4src}
+              //   controls
+              //   muted
+              //   autoPlay
+              // />
             )
           ) : (
-            <img src={picture.img} alt={picture.caption} />
+            <PrettyPicture src={picture.img} alt={picture.caption} />
           )}
 
           <p>{picture.caption}</p>
