@@ -7,7 +7,7 @@ const UNITS: { seconds: number; singular: string }[] = [
   { seconds: 1, singular: "second" },
 ];
 
-export function humanizeSeconds(totalSeconds: number) {
+function humanizeSeconds(totalSeconds: number) {
   const seconds = Math.abs(Math.round(totalSeconds));
 
   for (const { seconds: unitSeconds, singular } of UNITS) {
@@ -20,14 +20,30 @@ export function humanizeSeconds(totalSeconds: number) {
   return "0 seconds";
 }
 
-export function PrettyDate({ date }: { date?: string }) {
-  if (!date) return null;
+// export function PrettyDate({ date }: { date?: string }) {
+//   if (!date) return null;
 
-  return <p>{prettyPrintDate(date)}</p>;
-}
+//   return (
+//     <p>
+//       <PrettyPrintDate date={date} />
+//     </p>
+//   );
+// }
 
-export function prettyPrintDate(date: string, { withDate = true }: { withDate?: boolean } = {}) {
+// export function prettyPrintDate(date: string, { withDate = true }: { withDate?: boolean } = {}) {
+//   const parsedDate = new Date(date);
+//   const ageSeconds = (Date.now() - parsedDate.getTime()) / 1000;
+//   return `${withDate ? parsedDate.toLocaleDateString() + " - " : ""}${humanizeSeconds(ageSeconds)} ago`;
+// }
+
+export function PrettyPrintDate({ date, withDate = true }: { date: string; withDate?: boolean }) {
   const parsedDate = new Date(date);
-  const ageSeconds = (Date.now() - parsedDate.getTime()) / 1000;
-  return `${withDate ? parsedDate.toLocaleDateString() + " - " : ""}${humanizeSeconds(ageSeconds)} ago`;
+  const ageSeconds = getAgeSeconds(date);
+  return (
+    <>{`${withDate ? `${parsedDate.toLocaleDateString()} - ` : ""}${humanizeSeconds(ageSeconds)} ago`}</>
+  );
+}
+function getAgeSeconds(date: string) {
+  const parsedDate = new Date(date);
+  return (Date.now() - parsedDate.getTime()) / 1000;
 }
