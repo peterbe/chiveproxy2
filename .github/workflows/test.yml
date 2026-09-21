@@ -27,7 +27,7 @@ jobs:
         run: sleep 1
       - name: Test Server
         run: |
-          curl --fail --retry-connrefused --retry 3 http://localhost:5173
+          curl --fail --retry-connrefused --retry 3 http://localhost:3000
           curl --fail http://localhost:5173/favicon.ico
           curl --fail http://localhost:5173/apple-touch-icon.png
           curl --fail http://localhost:5173/manifest.json
