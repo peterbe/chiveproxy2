@@ -31,5 +31,6 @@ jobs:
           curl --fail http://localhost:3000/favicon.ico
           curl --fail http://localhost:3000/apple-touch-icon.png
           curl --fail http://localhost:3000/manifest.json
+      - run: bun run test-server http://localhost:3000
       - name: Stop Server
         cancel: server
