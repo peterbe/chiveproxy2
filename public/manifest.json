@@ -1,6 +1,6 @@
 {
-  "short_name": "ChivePWA",
-  "name": "The Chive PWA",
+  "short_name": "Chive",
+  "name": "Chive PWA",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

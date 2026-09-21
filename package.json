@@ -12,7 +12,8 @@
     "fmt:check": "oxfmt --check",
     "preview": "vite preview",
     "serve": "bun run src/serve.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test-server": "bun run src/test-server.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.103.1",
