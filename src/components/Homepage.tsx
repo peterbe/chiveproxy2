@@ -1,6 +1,7 @@
 import { useCards } from "./../useCards";
 import styles from "./Homepage.module.css";
 import { Listcards } from "./Listcards";
+import { Loading } from "./Loading";
 import { Logo } from "./Logo";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
@@ -19,8 +20,8 @@ export function Homepage() {
       <Logo />
       {/* <CachedInfo data={data?._cacheInfo} /> */}
       {data && <Searchform />}
-      {isStillPending && <p>Loading...</p>}
-      {data && <Listcards cards={data.cards} preload />}
+      {isStillPending && <Loading />}
+      {data && <Listcards cards={data.cards} preloadCards={5} />}
     </div>
   );
 }
