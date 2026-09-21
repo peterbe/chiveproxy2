@@ -19,3 +19,17 @@ jobs:
       - run: bun run fmt:check
       - run: bun run lint
       - run: bun run build
+      - name: Server
+        id: server
+        background: true
+        run: bun run serve
+      - name: Wait for Server
+        run: sleep 1
+      - name: Test Server
+        run: |
+          curl --fail --retry-connrefused --retry 3 http://localhost:5173
+          curl --fail http://localhost:5173/favicon.ico
+          curl --fail http://localhost:5173/apple-touch-icon.png
+          curl --fail http://localhost:5173/manifest.json
+      - name: Stop Server
+        cancel: server
