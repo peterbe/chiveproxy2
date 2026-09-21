@@ -1,4 +1,5 @@
 import { useCards } from "./../useCards";
+import styles from "./Homepage.module.css";
 import { Listcards } from "./Listcards";
 import { Logo } from "./Logo";
 import { ReloadAlert } from "./ReloadAlert";
@@ -13,7 +14,7 @@ export function Homepage() {
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
 
   return (
-    <div className="homepage">
+    <div className={styles.homepage}>
       {error && <ReloadAlert error={error} />}
       <Logo />
       {/* <CachedInfo data={data?._cacheInfo} /> */}

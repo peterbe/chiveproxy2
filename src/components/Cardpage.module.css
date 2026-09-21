@@ -1,7 +1,17 @@
+.cardpage {
+  margin: 0 auto 100px;
+  max-width: 1000px;
+}
+
+.cardTitle {
+  margin: 20px 0;
+}
+
 .gridPictures {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  margin: 0 auto 100px;
+  max-width: 1000px;
 }
 
 .gridPictures a {
@@ -13,11 +23,25 @@
   height: 75px;
   object-fit: cover;
 }
+@media (min-width: 600px) {
+  .gridPictures a img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+}
 
 .listPictures {
+  margin: 0 auto 100px;
+  max-width: 600px;
+
   article {
     margin-bottom: 40px;
-    text-align: center;
+  }
+  @media (min-width: 600px) {
+    article {
+      margin-bottom: 80px;
+    }
   }
   video {
     width: 100%;
