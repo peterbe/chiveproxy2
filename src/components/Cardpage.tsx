@@ -25,9 +25,10 @@ export function Cardpage() {
     return <Custom404 />;
   }
   return (
-    <div className="cardpage">
+    <div className={styles.cardpage}>
       {isStillPending && <Loading />}
-      {data && <h1>{data.text}</h1>}
+
+      {data && <h1 className={styles.cardTitle}>{data.text}</h1>}
       {data?.date && <PrettyPrintDate date={data?.date} />}
       <CachedInfo data={data?._cacheInfo} />
       {error && <ReloadAlert error={error} />}
@@ -67,17 +68,9 @@ function List({ pictures }: { pictures: CardPicture[] }) {
         <article key={picture.img} id={`img${i}`}>
           {picture.mp4src ? (
             isSafari ? (
-              // <video src={picture.mp4src} controls muted />
-              // <img src={picture.mp4src} alt={picture.caption} />
               <PrettyPicture src={picture.mp4src} alt={picture.caption} />
             ) : (
               <PrettyVideo src={picture.mp4src} />
-              // <video
-              //   src={picture.mp4src}
-              //   controls
-              //   muted
-              //   autoPlay
-              // />
             )
           ) : (
             <PrettyPicture src={picture.img} alt={picture.caption} />
