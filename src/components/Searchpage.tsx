@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router";
 import { Listcards } from "./Listcards";
+import { Loading } from "./Loading";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
 import { useDocumentTitle } from "@/useDocumentTitle";
@@ -19,9 +20,9 @@ export function Searchpage() {
     <div>
       {error && <ReloadAlert error={error} />}
       <Searchform />
-      {isStillPending && <p>Loading...</p>}
+      {isStillPending && <Loading />}
       {data && <p>Found {data.search.count} results.</p>}
-      {data && <Listcards cards={data.cards} />}
+      {data && <Listcards cards={data.cards} preloadCards={1} />}
     </div>
   );
 }

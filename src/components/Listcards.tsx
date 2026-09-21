@@ -4,13 +4,13 @@ import { useCard } from "@/useCard";
 
 import type { Card } from "@/types";
 
-export function Listcards({ cards, preload = false }: { cards: Card[]; preload?: boolean }) {
+export function Listcards({ cards, preloadCards = 0 }: { cards: Card[]; preloadCards?: number }) {
   return (
     <div className={styles.listCards}>
       {cards.map((card, i) => {
         return (
           <article key={card.id}>
-            {preload && i < 5 && <PreloadCard uri={card.uri} />}
+            {preloadCards && i < preloadCards && <PreloadCard uri={card.uri} />}
             <h2>
               <Link to={`/${card.uri}`} viewTransition>
                 {card.text}
