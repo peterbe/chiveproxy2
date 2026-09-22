@@ -3,7 +3,7 @@ import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig } from "vite";
 
-const API_TARGET = process.env.VITE_API_TARGET ?? "https://chiveproxy.peterbe.com";
+const API_TARGET = process.env.VITE_API_TARGET ?? "https://chive.peterbe.com";
 
 // https://vite.dev/config/
 export default defineConfig({

@@ -2,7 +2,7 @@ import type { Card, CardPicture } from "./types";
 
 const wrapImageUrl = (url: string) => {
   const sp = new URLSearchParams({ url, redirect_to_file: "true" });
-  return `https://chiveproxy.peterbe.com/api/imageproxy?${sp.toString()}`;
+  return `https://chive.peterbe.com/api/imageproxy?${sp.toString()}`;
 };
 
 export const wrapPicture = (picture: CardPicture) => {
