@@ -1,0 +1,45 @@
+// @use "pico";
+// @use "@picocss/pico/scss/pico";
+@use "@picocss/pico/scss/pico" with (
+  $modules: (
+    "content/code": false,
+    "forms/input-color": false,
+    "forms/input-date": false,
+    "forms/input-file": false,
+    "forms/input-range": false,
+    "forms/input-search": true,
+    "components/accordion": false,
+    "components/card": true,
+    "components/dropdown": false,
+    "components/loading": false,
+    "components/modal": false,
+    "components/nav": true,
+    "components/progress": false,
+    "components/tooltip": false,
+    "utilities/accessibility": true,
+    "utilities/reduce-motion": true,
+  )
+);
+
+/* Global Reset */
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+//   font-family: sans-serif;
+// }
+
+/* ─── THE CRITICAL STICKY NAVBAR RULES ─── */
+
+/* Navbar elements layout */
+// h1,
+// p {
+//   color: rgb(45, 49, 56);
+// }
+
+/* .content {
+  padding: 2rem;
+  background-color: #f4f4f4;
+  height: 2000px;
+  line-height: 1.6;
+} */

@@ -11,7 +11,12 @@ export function Nav() {
     <nav className={styles.navbar}>
       <ul className={styles.navLinks}>
         <li>
-          <Link to="/" className={styles.standardButton} viewTransition>
+          <Link
+            to="/"
+            role="button"
+            // className={styles.standardButton}
+            viewTransition
+          >
             Home
           </Link>
         </li>
@@ -20,7 +25,8 @@ export function Nav() {
           {uri ? (
             <Link
               to="/"
-              className={styles.standardButton}
+              role="button"
+              // className={styles.standardButton}
               onClick={(event) => {
                 event.preventDefault();
                 navigate(-1);
@@ -31,7 +37,7 @@ export function Nav() {
           ) : (
             <Link
               to={window.location.href}
-              className={styles.standardButton}
+              // className={styles.standardButton}
               type="button"
               onClick={(event) => {
                 event.preventDefault();
@@ -46,8 +52,9 @@ export function Nav() {
         {uri && (
           <li>
             <Link
+              role="button"
               to={window.location.href}
-              className={styles.standardButton}
+              // className={styles.standardButton}
               onClick={async (event) => {
                 event.preventDefault();
                 try {
@@ -64,8 +71,9 @@ export function Nav() {
         {hasScrolledDown && (
           <li>
             <Link
+              role="button"
               to={window.location.href}
-              className={styles.standardButton}
+              // className={styles.standardButton}
               type="button"
               onClick={(event) => {
                 event.preventDefault();

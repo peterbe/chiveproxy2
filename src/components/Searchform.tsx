@@ -22,24 +22,35 @@ export function Searchform() {
       }}
       className={styles.searchForm}
     >
-      <input
-        type="search"
-        placeholder="Search..."
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-      />
-      <button type="submit">Search</button>
-      <button
-        type="button"
-        onClick={() => {
-          setQ("");
-          if (pathname === "/search") {
-            navigate(`/`);
-          }
-        }}
-      >
-        Clear
-      </button>
+      <div className="grid">
+        <div>
+          <input
+            type="search"
+            placeholder="Search..."
+            value={q}
+            name="search"
+            onChange={(e) => setQ(e.target.value)}
+          />
+        </div>
+        {/* <div>
+          <button type="submit" disabled={!q.trim()}>
+            Search
+          </button>
+        </div> */}
+      </div>
+      {/* {q && (
+        <button
+          type="button"
+          onClick={() => {
+            setQ("");
+            if (pathname === "/search") {
+              navigate(`/`);
+            }
+          }}
+        >
+          Clear
+        </button>
+      )} */}
     </form>
   );
 }
