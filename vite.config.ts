@@ -13,6 +13,10 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  css: {
+    // From https://github.com/picocss/pico/issues/717#issuecomment-3695614717
+    preprocessorOptions: { scss: { quietDeps: true } },
+  },
   server: {
     proxy: {
       "/api": {

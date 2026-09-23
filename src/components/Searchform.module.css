@@ -5,8 +5,9 @@
   gap: 10px;
   width: 100%;
   margin: 20px auto;
+  margin-top: 25px;
 
   input[type="search"] {
-    min-width: 200px;
+    min-width: 400px;
   }
 }
