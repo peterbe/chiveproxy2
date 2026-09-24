@@ -20,7 +20,7 @@ export function Cardpage() {
 
   const { data, isPending, isLoading, error } = useCard(uri);
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
-  useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chiveproxy");
+  useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chive");
   if (error && error instanceof Card404) {
     return <Custom404 />;
   }
