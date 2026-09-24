@@ -12,7 +12,7 @@ export function Searchpage() {
 
   const q = searchParams.get("q") || "";
   const { data, isPending, error } = useSearch(q);
-  useDocumentTitle("Search Chiveproxy");
+  useDocumentTitle("Search Chive");
 
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
 

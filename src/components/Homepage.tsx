@@ -10,7 +10,7 @@ import { useSlowTruth } from "@/useSlowTruth";
 
 export function Homepage() {
   const { data, isPending, error } = useCards();
-  useDocumentTitle("Chiveproxy");
+  useDocumentTitle("Chive");
 
   const isStillPending = useSlowTruth(isPending, { delay: 500 });
 
