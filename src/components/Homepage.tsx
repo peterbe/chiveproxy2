@@ -22,7 +22,7 @@ export function Homepage() {
       {/* <CachedInfo data={data?._cacheInfo} /> */}
       {data && <Searchform />}
       {showLoading && <Loading />}
-      {data && <Listcards cards={data.cards} preloadCards={5} />}
+      {data && <Listcards cards={data.cards} preloadCards={3} />}
     </div>
   );
 }
