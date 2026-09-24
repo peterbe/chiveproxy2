@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useTimeout } from "usehooks-ts";
 import styles from "./PictureLoadingProgressBar.module.css";
+import { useTimedout } from "./useTimedout";
 
 export function PictureLoadingProgressBar({
   percent,
@@ -11,13 +10,7 @@ export function PictureLoadingProgressBar({
   failed: number;
   onClose: () => void;
 }) {
-  const [hideCloseButton, setHideCloseButton] = useState(true);
-
-  const hide = () => {
-    setHideCloseButton(false);
-  };
-
-  useTimeout(hide, 3000);
+  const timedOut = useTimedout(1000);
 
   return (
     <div className={styles.pictureLoadingProgressBar}>
@@ -26,7 +19,7 @@ export function PictureLoadingProgressBar({
       {failed > 0 && <p className={styles.failed}>{failed} failed</p>}
 
       <div className={styles.closeButtonWrapper}>
-        {!hideCloseButton && (
+        {!timedOut && (
           <button onClick={onClose} type="button" className="outline secondary">
             Close
           </button>

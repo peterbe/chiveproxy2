@@ -12,8 +12,8 @@ import { PrettyVideo } from "./PrettyVideo";
 import { ReloadAlert } from "./ReloadAlert";
 import { useImagePreloader } from "./useImagePreloader";
 import { useIsSafari } from "./useIsSafari";
+import { useTimedout } from "./useTimedout";
 import { useDocumentTitle } from "@/useDocumentTitle";
-import { useSlowTruth } from "@/useSlowTruth";
 
 import type { CardPicture } from "@/types";
 
@@ -23,7 +23,9 @@ export function Cardpage() {
 
   const { data, isPending, isLoading, error } = useCard(uri);
 
-  const isStillPending = useSlowTruth(isPending, { delay: 1000 });
+  const isTimedOut = useTimedout(1000);
+
+  const showLoading = isPending && !isTimedOut;
 
   useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chive");
   if (error && error instanceof Card404) {
@@ -31,7 +33,7 @@ export function Cardpage() {
   }
   return (
     <div className={styles.cardpage}>
-      {isStillPending && <Loading />}
+      {showLoading && <Loading />}
 
       {data && <h1 className={styles.cardTitle}>{data.text}</h1>}
       {data?.date && <PrettyPrintDate date={data?.date} />}
