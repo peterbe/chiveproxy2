@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import styles from "./Listcards.module.css";
+import { useImagePreloader } from "./useImagePreloader";
 import { useCard } from "@/useCard";
 
 import type { Card } from "@/types";
@@ -33,8 +34,20 @@ function PreloadCard({ uri }: { uri: number }) {
   const { data, isError } = useCard(uri);
   if (data) {
     // console.log("Preloaded", uri);
+    const pictureUrls = data.pictures.filter((p) => !p.mp4src).map((picture) => picture.img);
+    return <PreloadPictureUrls urls={pictureUrls} />;
   } else if (isError) {
     console.log("Preload failed", uri);
+  }
+  return null;
+}
+
+function PreloadPictureUrls({ urls }: { urls: string[] }) {
+  const { failed, total, done } = useImagePreloader(urls);
+  if (failed) {
+    console.warn(`Failed ${failed} images to preload`, urls);
+  } else if (done) {
+    console.log(`Successfully preloaded ${total} images`);
   }
   return null;
 }
