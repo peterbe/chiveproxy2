@@ -63,7 +63,7 @@ export function useCards() {
       return data;
     },
     refetchIntervalInBackground: true,
-    refetchInterval: 60000, // Refetch every 60 seconds
+    refetchInterval: 60 * 5 * 1000, // Refetch every 5 min seconds
     refetchOnWindowFocus: process.env.NODE_ENV !== "production",
   });
 }
