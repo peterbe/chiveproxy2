@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 type Status = "loading" | "loaded" | "error";
 
 export function useImagePreloader(urls: string[]) {
-  const [statuses, setStatuses] = useState<Record<string, Status>>({});
+  const [statuses, setStatuses] = useState<Record<string, Status>>(() =>
+    Object.fromEntries(urls.map((u) => [u, "loading" as Status])),
+  );
 
   useEffect(() => {
     let cancelled = false;
-    setStatuses(Object.fromEntries(urls.map((u) => [u, "loading" as Status])));
 
     const images = urls.map((url) => {
       const img = new Image();
