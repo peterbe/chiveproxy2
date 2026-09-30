@@ -85,13 +85,17 @@ function Grid({ pictures }: { pictures: CardPicture[] }) {
 }
 
 function List({ pictures }: { pictures: CardPicture[] }) {
+  const [forceVideoTag, setForceVideoTag] = useState(false);
   const isSafari = useIsSafari();
+
+  const hasSafariVideo = isSafari && pictures.some((picture) => picture.mp4src);
+
   return (
     <div className={styles.listPictures}>
       {pictures.map((picture, i) => (
         <article key={picture.img} id={`img${i}`}>
           {picture.mp4src ? (
-            isSafari ? (
+            isSafari && !forceVideoTag ? (
               <PrettyPicture src={picture.mp4src} alt={picture.caption} />
             ) : (
               <PrettyVideo src={picture.mp4src} />
@@ -103,6 +107,12 @@ function List({ pictures }: { pictures: CardPicture[] }) {
           <p>{picture.caption}</p>
         </article>
       ))}
+
+      {hasSafariVideo && !forceVideoTag && (
+        <button type="button" onClick={() => setForceVideoTag(true)}>
+          Force Video Tag
+        </button>
+      )}
     </div>
   );
 }
