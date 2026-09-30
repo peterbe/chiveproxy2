@@ -6,7 +6,7 @@ Bun.serve({
   port: 3000,
   hostname: "0.0.0.0",
   routes: {
-    "/api/cards": {
+    "/api/cards/": {
       async GET() {
         const response = await fetch("https://chive.peterbe.com/api/cards/");
         if (!response.ok) {
@@ -19,7 +19,7 @@ Bun.serve({
         return Response.json(data);
       },
     },
-    "/api/cards/:uri": {
+    "/api/cards/:uri/": {
       async GET(req) {
         const uri = req.params.uri;
         const response = await fetch(`https://chive.peterbe.com/api/cards/${uri}/`);
