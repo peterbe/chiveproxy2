@@ -5,6 +5,9 @@ async function main() {
   console.log("Starting test server with URL:", url);
   const response = await fetch(url);
   console.log("Response status:", response.status);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${url} status: ${response.status}`);
+  }
   const body = await response.text();
   console.log("Response body:", body);
   console.log("");
