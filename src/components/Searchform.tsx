@@ -6,7 +6,7 @@ export function Searchform() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
-  const [q, setQ] = useState(searchParams.get("q") || "");
+  const [q, setQ] = useState(() => searchParams.get("q") || "");
   return (
     <form
       onSubmit={(e) => {
