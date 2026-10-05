@@ -36,7 +36,7 @@ export function useCards() {
           const ageSeconds = (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
           console.log("IT WAS IN THE CACHE", { ageSeconds });
           if (ageSeconds > 60) {
-            backgroundRefresh();
+            await backgroundRefresh();
           }
         } else {
           typed._cacheInfo = { created: new Date().toISOString(), hit: true };
@@ -52,9 +52,6 @@ export function useCards() {
       const data = (await res.json()) as ServerCards;
       for (const card of data.cards) {
         wrapCard(card);
-        // if (card.img.startsWith("https://thechive.com")) {
-        //   card.img = wrapImageUrl(card.img);
-        // }
       }
 
       data._cacheInfo = { created: new Date().toISOString(), hit: false };
