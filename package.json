@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bunx vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
-    "preview": "vite preview",
+    "dev": "bunx vp dev --host 0.0.0.0",
+    "build": "tsc -b && vp build",
+    "lint": "vp lint",
+    "lint:fix": "vp lint --fix",
+    "fmt": "vp fmt",
+    "fmt:check": "vp fmt --check",
+    "preview": "vp preview",
     "serve": "bun run src/serve.ts",
     "prepare": "husky",
     "test-server": "bun run src/test-server.ts"
@@ -35,10 +35,19 @@
     "@vitejs/plugin-react": "^6.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "husky": "^9.1.7",
-    "oxfmt": "^0.68.0",
-    "oxlint": "^1.81.0",
     "sass-embedded": "^1.105.0",
     "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0",
+    "vite-plus": "1.0.0"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@1.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.2",
+      "onFail": "download"
+    }
   }
 }
