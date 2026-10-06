@@ -1,22 +1,19 @@
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import styles from "./Nav.module.css";
 import { useScrollDetection } from "@/useScrollDetection";
 
 export function Nav() {
   const navigate = useNavigate();
   const params = useParams();
+  const location = useLocation();
+  const currentHref = location.pathname + location.search;
   const uri = params.uri;
   const hasScrolledDown = useScrollDetection();
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navLinks}>
         <li>
-          <Link
-            to="/"
-            role="button"
-            // className={styles.standardButton}
-            viewTransition
-          >
+          <Link to="/" role="button" viewTransition>
             Home
           </Link>
         </li>
@@ -26,7 +23,6 @@ export function Nav() {
             <Link
               to="/"
               role="button"
-              // className={styles.standardButton}
               onClick={(event) => {
                 event.preventDefault();
                 navigate(-1);
@@ -36,8 +32,7 @@ export function Nav() {
             </Link>
           ) : (
             <Link
-              to={window.location.href}
-              // className={styles.standardButton}
+              to={currentHref}
               type="button"
               onClick={(event) => {
                 event.preventDefault();
@@ -53,8 +48,7 @@ export function Nav() {
           <li>
             <Link
               role="button"
-              to={window.location.href}
-              // className={styles.standardButton}
+              to={currentHref}
               onClick={async (event) => {
                 event.preventDefault();
                 try {
@@ -72,8 +66,7 @@ export function Nav() {
           <li>
             <Link
               role="button"
-              to={window.location.href}
-              // className={styles.standardButton}
+              to={currentHref}
               type="button"
               onClick={(event) => {
                 event.preventDefault();
