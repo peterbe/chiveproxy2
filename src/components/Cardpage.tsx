@@ -19,7 +19,8 @@ import type { CardPicture } from "@/types";
 
 export function Cardpage() {
   const params = useParams();
-  const uri = params.uri as string;
+  let uri = params.uri as string;
+  uri = uri.replace(".html", "");
 
   const { data, isPending, isLoading, error } = useCard(uri);
 

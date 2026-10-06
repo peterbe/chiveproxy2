@@ -1,4 +1,9 @@
+import { useIsHydrated } from "@/useIsHydrated";
+
 export function useIsSafari() {
+  const isHydrated = useIsHydrated();
+  if (!isHydrated) return false;
+
   const ua = navigator.userAgent.toLowerCase();
   const vendor = navigator.vendor.toLowerCase();
 

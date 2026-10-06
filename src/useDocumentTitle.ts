@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
  * previous title on unmount.
  */
 export function useDocumentTitle(title: string) {
-  const previousTitle = useRef(document.title);
+  const previousTitle = useRef(typeof document === "undefined" ? "" : document.title);
 
   useEffect(() => {
     document.title = title;
