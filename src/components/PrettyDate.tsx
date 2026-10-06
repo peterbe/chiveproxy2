@@ -1,3 +1,5 @@
+import { useIsHydrated } from "@/useIsHydrated";
+
 const UNITS: { seconds: number; singular: string }[] = [
   { seconds: 31536000, singular: "year" },
   { seconds: 2592000, singular: "month" },
@@ -21,6 +23,9 @@ function humanizeSeconds(totalSeconds: number) {
 }
 
 export function PrettyPrintDate({ date, withDate = true }: { date: string; withDate?: boolean }) {
+  // Relative time and locale formatting differ between server and browser
+  const isHydrated = useIsHydrated();
+  if (!isHydrated) return null;
   const parsedDate = new Date(date);
   const ageSeconds = getAgeSeconds(date);
   return (

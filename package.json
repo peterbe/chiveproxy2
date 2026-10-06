@@ -11,6 +11,7 @@
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
     "preview": "vp preview",
+    "prerender": "bun run scripts/prerender.ts",
     "serve": "bun run src/serve.ts",
     "prepare": "husky",
     "test-server": "bun run src/test-server.ts"

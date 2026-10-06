@@ -1,9 +1,11 @@
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import styles from "./Nav.module.css";
 import { useScrollDetection } from "@/useScrollDetection";
 
 export function Nav() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const here = location.pathname + location.search;
   const params = useParams();
   const uri = params.uri;
   const hasScrolledDown = useScrollDetection();
@@ -36,7 +38,7 @@ export function Nav() {
             </Link>
           ) : (
             <Link
-              to={window.location.href}
+              to={here}
               // className={styles.standardButton}
               type="button"
               onClick={(event) => {
@@ -53,7 +55,7 @@ export function Nav() {
           <li>
             <Link
               role="button"
-              to={window.location.href}
+              to={here}
               // className={styles.standardButton}
               onClick={async (event) => {
                 event.preventDefault();
@@ -72,7 +74,7 @@ export function Nav() {
           <li>
             <Link
               role="button"
-              to={window.location.href}
+              to={here}
               // className={styles.standardButton}
               type="button"
               onClick={(event) => {

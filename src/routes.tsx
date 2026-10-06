@@ -5,7 +5,9 @@ import { Homepage } from "./components/Homepage";
 import { Searchpage } from "./components/Searchpage";
 import { Root } from "./root";
 
-export const router = createBrowserRouter([
+import type { RouteObject } from "react-router";
+
+export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Root />,
@@ -25,4 +27,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+];
+
+export const router = typeof window === "undefined" ? null : createBrowserRouter(routes);
