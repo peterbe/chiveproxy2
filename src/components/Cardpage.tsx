@@ -22,7 +22,7 @@ export function Cardpage() {
   const params = useParams();
   const uri = params.uri as string;
 
-  const { data, isPending, isLoading, error } = useCard(uri);
+  const { data, isPending, isLoading, error, refetch } = useCard(uri);
 
   const isTimedOut = useTimedout(1000);
 
@@ -43,7 +43,7 @@ export function Cardpage() {
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}
 
-      {data && <CacheOptions data={data._cacheInfo} />}
+      {data && <CacheOptions data={data._cacheInfo} refetch={refetch} uri={uri} />}
     </div>
   );
 }

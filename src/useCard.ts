@@ -1,14 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
+import { cardCache } from "./cardCache";
 import { wrapPicture } from "./wrapImageUrl";
 
 import type { ServerCard } from "./types";
-
-const cardCache = new LocalStorageLRUCache<string, ServerCard>(
-  "chiveproxy2:card",
-  25,
-  1000 * 60 * 60 * 24, // TODO: bump up
-);
 
 async function backgroundRefresh(uri: string | number) {
   const res = await fetch(`/api/cards/${uri}/`);
