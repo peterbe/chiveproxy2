@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { Card404, useCard } from "../useCard";
 import { CachedInfo } from "./CachedInfo";
+import { CacheOptions } from "./CacheOptions";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
 import { Loading } from "./Loading";
@@ -21,7 +22,7 @@ export function Cardpage() {
   const params = useParams();
   const uri = params.uri as string;
 
-  const { data, isPending, isLoading, error } = useCard(uri);
+  const { data, isPending, isLoading, error, refetch } = useCard(uri);
 
   const isTimedOut = useTimedout(1000);
 
@@ -41,6 +42,8 @@ export function Cardpage() {
       {error && <ReloadAlert error={error} />}
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}
+
+      {data && <CacheOptions data={data._cacheInfo} refetch={refetch} uri={uri} />}
     </div>
   );
 }
@@ -88,7 +91,7 @@ function List({ pictures }: { pictures: CardPicture[] }) {
   const [forceVideoTag, setForceVideoTag] = useState(false);
   const isSafari = useIsSafari();
 
-  const hasSafariVideo = isSafari && pictures.some((picture) => picture.mp4src);
+  const hasSafariVideo = isSafari && pictures.filter((picture) => picture.mp4src).length > 1;
 
   return (
     <div className={styles.listPictures}>
