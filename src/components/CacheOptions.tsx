@@ -23,8 +23,9 @@ export function CacheOptions({
       {data.hit ? (
         <div>
           <p>
-            This card was served from cache. It was cached at:{" "}
-            <PrettyPrintDate date={data.created} />
+            This card was served from cache.
+            <br />
+            It was cached at: <PrettyPrintDate date={data.created} />
           </p>
           <p>
             {isPurged ? (

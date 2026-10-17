@@ -1,4 +1,7 @@
 .loading {
   margin: 50px auto 100px;
   max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

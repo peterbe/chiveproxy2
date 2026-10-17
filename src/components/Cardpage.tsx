@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { Card404, useCard } from "../useCard";
-import { CachedInfo } from "./CachedInfo";
 import { CacheOptions } from "./CacheOptions";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
@@ -38,7 +37,7 @@ export function Cardpage() {
 
       {data && <h1 className={styles.cardTitle}>{data.text}</h1>}
       {data?.date && <PrettyPrintDate date={data?.date} />}
-      <CachedInfo data={data?._cacheInfo} />
+      {/* <CachedInfo data={data?._cacheInfo} /> */}
       {error && <ReloadAlert error={error} />}
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}
@@ -65,24 +64,22 @@ function Grid({ pictures }: { pictures: CardPicture[] }) {
   }
 
   return (
-    <div>
-      <div className={styles.gridPictures}>
-        {pictures.map((picture, i) => (
-          <a
-            key={picture.img}
-            href={`#img${i}`}
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById(`img${i}`);
-              if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-          >
-            <img src={picture.img} alt={picture.caption} />
-          </a>
-        ))}
-      </div>
+    <div className={styles.gridPictures}>
+      {pictures.map((picture, i) => (
+        <a
+          key={picture.img}
+          href={`#img${i}`}
+          onClick={(e) => {
+            e.preventDefault();
+            const element = document.getElementById(`img${i}`);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          <img src={picture.img} alt={picture.caption} />
+        </a>
+      ))}
     </div>
   );
 }
@@ -91,7 +88,7 @@ function List({ pictures }: { pictures: CardPicture[] }) {
   const [forceVideoTag, setForceVideoTag] = useState(false);
   const isSafari = useIsSafari();
 
-  const hasSafariVideo = isSafari && pictures.filter((picture) => picture.mp4src).length > 1;
+  const hasSafariVideo = isSafari && pictures.filter((picture) => picture.mp4src).length > 2;
 
   return (
     <div className={styles.listPictures}>

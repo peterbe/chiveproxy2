@@ -1,6 +1,9 @@
 .cardpage {
-  margin: 0 auto 100px;
+  width: 100%;
   max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .cardTitle {
@@ -10,8 +13,10 @@
 .gridPictures {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto 100px;
+  align-items: center;
   max-width: 1000px;
+  margin-top: 20px;
+  margin-bottom: 70px;
 }
 
 .gridPictures a {
