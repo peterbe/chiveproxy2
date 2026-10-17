@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useIntersectionObserver } from "usehooks-ts";
 import styles from "./Listcards.module.css";
+import { PrettyPicture } from "./PrettyPicture";
 import { useImagePreloader } from "./useImagePreloader";
 import { useCard } from "@/useCard";
 
@@ -35,7 +36,7 @@ function ArticleCard({ card, preload }: { card: Card; preload: boolean }) {
       {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
 
       <Link to={`/${card.uri}`} viewTransition>
-        <img src={card.img} alt={card.text} />
+        <PrettyPicture src={card.img} alt={card.text} />
       </Link>
       <p>{card.human_time}</p>
     </article>
@@ -46,7 +47,6 @@ function PreloadCard({ uri }: { uri: number }) {
   const { data, isError } = useCard(uri);
 
   if (data) {
-    // console.log("Preloaded", uri);
     const pictureUrls = data.pictures.filter((p) => !p.mp4src).map((picture) => picture.img);
     return <PreloadPictureUrls urls={pictureUrls} />;
   } else if (isError) {

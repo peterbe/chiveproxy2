@@ -16,7 +16,7 @@ export class LocalStorageLRUCache<K extends string | number, V> {
     this.keysKey = `${prefix}:keys`;
   }
 
-  private _getKeys(): K[] {
+  public _getKeys(): K[] {
     const data = localStorage.getItem(this.keysKey);
     return data ? (JSON.parse(data) as K[]) : [];
   }
@@ -25,7 +25,7 @@ export class LocalStorageLRUCache<K extends string | number, V> {
     localStorage.setItem(this.keysKey, JSON.stringify(keys));
   }
 
-  private _itemKey(key: K): string {
+  public _itemKey(key: K): string {
     return `${this.prefix}:item:${key}`;
   }
 

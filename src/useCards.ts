@@ -7,7 +7,7 @@ import type { ServerCards } from "./types";
 const cardCache = new LocalStorageLRUCache<string, ServerCards>(
   "chiveproxy2:cards",
   1,
-  1000 * 60 * 60 * 1,
+  1000 * 60 * 60 * 24,
 );
 
 async function backgroundRefresh() {
