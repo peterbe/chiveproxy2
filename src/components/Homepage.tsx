@@ -1,4 +1,5 @@
 import { useCards } from "./../useCards";
+import { CacheInfo } from "./CacheInfo";
 import styles from "./Homepage.module.css";
 import { Listcards } from "./Listcards";
 import { Loading } from "./Loading";
@@ -23,6 +24,7 @@ export function Homepage() {
       {data && <Searchform />}
       {showLoading && <Loading />}
       {data && <Listcards cards={data.cards} preloadCards={3} />}
+      {data && <CacheInfo />}
     </div>
   );
 }

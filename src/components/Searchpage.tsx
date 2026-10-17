@@ -3,6 +3,7 @@ import { Listcards } from "./Listcards";
 import { Loading } from "./Loading";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
+import styles from "./Searchpage.module.css";
 import { useTimedout } from "./useTimedout";
 import { useDocumentTitle } from "@/useDocumentTitle";
 import { useSearch } from "@/useSearch";
@@ -22,7 +23,7 @@ export function Searchpage() {
       {error && <ReloadAlert error={error} />}
       <Searchform />
       {showLoading && <Loading />}
-      {data && <p>Found {data.search.count} results.</p>}
+      {data && <p className={styles.searchCount}>Found {data.search.count} results.</p>}
       {data && <Listcards cards={data.cards} preloadCards={1} />}
     </div>
   );
