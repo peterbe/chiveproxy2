@@ -12,10 +12,10 @@ export function Searchform() {
       onSubmit={(e) => {
         e.preventDefault();
         if (q.trim()) {
-          navigate(`/search?q=${encodeURIComponent(q)}`);
+          void navigate(`/search?q=${encodeURIComponent(q)}`);
         } else {
           if (pathname === "/search") {
-            navigate(`/`);
+            void navigate(`/`);
           }
           console.log({ CURRENT_LOCATION: pathname });
         }
@@ -32,25 +32,7 @@ export function Searchform() {
             onChange={(e) => setQ(e.target.value)}
           />
         </div>
-        {/* <div>
-          <button type="submit" disabled={!q.trim()}>
-            Search
-          </button>
-        </div> */}
       </div>
-      {/* {q && (
-        <button
-          type="button"
-          onClick={() => {
-            setQ("");
-            if (pathname === "/search") {
-              navigate(`/`);
-            }
-          }}
-        >
-          Clear
-        </button>
-      )} */}
     </form>
   );
 }

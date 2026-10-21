@@ -2,7 +2,6 @@ import { cardCache } from "../cardCache";
 
 export function CacheInfo() {
   const cardCacheKeys = cardCache._getKeys();
-  console.log("Card cache keys:", cardCacheKeys);
   const rawSizes: number[] = cardCacheKeys.map((key) => {
     const itemKey = cardCache._itemKey(key);
     const raw = localStorage.getItem(itemKey);

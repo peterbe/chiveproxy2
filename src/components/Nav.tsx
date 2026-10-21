@@ -8,6 +8,7 @@ export function Nav() {
   const location = useLocation();
   const currentHref = location.pathname + location.search;
   const uri = params.uri;
+  const canGoBack = Boolean(uri) || location.pathname === "/search";
   const hasScrolledDown = useScrollDetection();
   return (
     <nav className={styles.navbar}>
@@ -19,13 +20,13 @@ export function Nav() {
         </li>
 
         <li>
-          {uri ? (
+          {canGoBack ? (
             <Link
               to="/"
               role="button"
               onClick={(event) => {
                 event.preventDefault();
-                navigate(-1);
+                void navigate(-1);
               }}
             >
               Back
