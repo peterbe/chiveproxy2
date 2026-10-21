@@ -13,7 +13,7 @@ export function Nav() {
     <nav className={styles.navbar}>
       <ul className={styles.navLinks}>
         <li>
-          <Link to="/" role="button" viewTransition>
+          <Link to="/" role="button">
             Home
           </Link>
         </li>
