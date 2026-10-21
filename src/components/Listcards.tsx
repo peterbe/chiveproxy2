@@ -29,13 +29,11 @@ function ArticleCard({ card, preload }: { card: Card; preload: boolean }) {
     <article ref={ref}>
       {(preload || isIntersecting) && <PreloadCard uri={card.uri} />}
       <h2>
-        <Link to={`/${card.uri}`} viewTransition>
-          {card.text}
-        </Link>
+        <Link to={`/${card.uri}`}>{card.text}</Link>
       </h2>
       {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
 
-      <Link to={`/${card.uri}`} viewTransition>
+      <Link to={`/${card.uri}`}>
         <PrettyPicture src={card.img} alt={card.text} />
       </Link>
       <p>{card.human_time}</p>
