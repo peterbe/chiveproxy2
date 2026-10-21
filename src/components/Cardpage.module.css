@@ -2,7 +2,6 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 1rem;
   box-sizing: border-box;
 }
 
@@ -17,6 +16,7 @@
   max-width: 1000px;
   margin-top: 20px;
   margin-bottom: 70px;
+  padding: 0 1rem;
 }
 
 .gridPictures a {
@@ -55,4 +55,8 @@
   img {
     width: 98%;
   }
+}
+
+.cardContent {
+  padding: 0 1rem;
 }

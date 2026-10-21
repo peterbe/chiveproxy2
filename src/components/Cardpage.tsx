@@ -35,10 +35,12 @@ export function Cardpage() {
     <div className={styles.cardpage}>
       {showLoading && <Loading />}
 
-      {data && <h1 className={styles.cardTitle}>{data.text}</h1>}
-      {data?.date && <PrettyPrintDate date={data?.date} />}
-      {/* <CachedInfo data={data?._cacheInfo} /> */}
-      {error && <ReloadAlert error={error} />}
+      <div className={styles.cardContent}>
+        {data && <h1 className={styles.cardTitle}>{data.text}</h1>}
+        {data?.date && <PrettyPrintDate date={data?.date} />}
+        {/* <CachedInfo data={data?._cacheInfo} /> */}
+        {error && <ReloadAlert error={error} />}
+      </div>
       {data && <Grid pictures={data.pictures} />}
       {data && <List pictures={data.pictures} />}
 
