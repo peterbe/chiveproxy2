@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { cardCache } from "../cardCache";
+import { cardsCache } from "../cardsCache";
+import buttonStyles from "./Buttons.module.css";
 
-export function CacheInfo() {
+export function CacheInfo({ refetch }: { refetch: () => void }) {
+  const [isPurged, setIsPurged] = useState(false);
+
   const cardCacheKeys = cardCache._getKeys();
   const rawSizes: number[] = cardCacheKeys.map((key) => {
     const itemKey = cardCache._itemKey(key);
@@ -12,6 +17,23 @@ export function CacheInfo() {
     <div>
       <p>Number of cached cards: {cardCacheKeys.length}</p>
       <p>Total size of cached cards: {formatBytes(rawSizes.reduce((a, b) => a + b, 0))}</p>
+      <p>
+        {isPurged ? (
+          <span>Cache Purged</span>
+        ) : (
+          <button
+            type="button"
+            className={buttonStyles.smallButton}
+            onClick={() => {
+              cardsCache.remove("cards");
+              refetch();
+              setIsPurged(true);
+            }}
+          >
+            Purge Homepage Cache
+          </button>
+        )}
+      </p>
     </div>
   );
 }

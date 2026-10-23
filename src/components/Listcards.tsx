@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useIntersectionObserver } from "usehooks-ts";
 import styles from "./Listcards.module.css";
+import { PrettyPrintDate } from "./PrettyDate";
 import { PrettyPicture } from "./PrettyPicture";
 import { useImagePreloader } from "./useImagePreloader";
 import { useCard } from "@/useCard";
@@ -33,12 +34,16 @@ function ArticleCard({ card, preload }: { card: Card; preload: boolean }) {
           {card.text}
         </Link>
       </h2>
-      {card.count_pictures && <small>({card.count_pictures} pictures)</small>}
+      {<small>({card.count_pictures} pictures)</small>}
 
       <Link to={`/${card.uri}`} viewTransition>
         <PrettyPicture src={card.img} alt={card.text} />
       </Link>
-      <p>{card.human_time}</p>
+      <p>
+        <small>
+          <PrettyPrintDate date={card.created} withDate={false} />
+        </small>
+      </p>
     </article>
   );
 }

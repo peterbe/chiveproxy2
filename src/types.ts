@@ -4,8 +4,8 @@ export type Card = {
   url: string;
   id: number;
   created: string;
-  human_time: string;
-  count_pictures?: number;
+  // human_time: string;
+  count_pictures: number;
   uri: number;
 };
 

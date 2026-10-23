@@ -10,7 +10,7 @@ import { useTimedout } from "./useTimedout";
 import { useDocumentTitle } from "@/useDocumentTitle";
 
 export function Homepage() {
-  const { data, isPending, error } = useCards();
+  const { data, isPending, error, refetch } = useCards();
   useDocumentTitle("Chive");
 
   const isTimedOut = useTimedout(1000);
@@ -24,7 +24,7 @@ export function Homepage() {
       {data && <Searchform />}
       {showLoading && <Loading />}
       {data && <Listcards cards={data.cards} preloadCards={3} />}
-      {data && <CacheInfo />}
+      {data && <CacheInfo refetch={refetch} />}
     </div>
   );
 }
