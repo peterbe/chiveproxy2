@@ -1,14 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { LocalStorageLRUCache } from "./LocalStorageLRUCache";
+import { cardsCache } from "./cardsCache";
 import { wrapCard } from "./wrapImageUrl";
 
 import type { ServerCards } from "./types";
-
-const cardCache = new LocalStorageLRUCache<string, ServerCards>(
-  "chiveproxy2:cards",
-  1,
-  1000 * 60 * 60 * 24,
-);
 
 async function backgroundRefresh() {
   const res = await fetch(`/api/cards/`);
@@ -20,7 +14,7 @@ async function backgroundRefresh() {
       wrapCard(card);
     }
     data._cacheInfo = { created: new Date().toISOString(), hit: false };
-    cardCache.set(`cards`, data);
+    cardsCache.set(`cards`, data);
   }
 }
 
@@ -28,7 +22,7 @@ export function useCards() {
   return useQuery<ServerCards>({
     queryKey: ["cards"],
     queryFn: async () => {
-      const cached = cardCache.get("cards");
+      const cached = cardsCache.get("cards");
       if (cached) {
         console.log("CACHE HIT");
         const typed = cached as ServerCards;
@@ -55,7 +49,7 @@ export function useCards() {
       }
 
       data._cacheInfo = { created: new Date().toISOString(), hit: false };
-      cardCache.set("cards", data);
+      cardsCache.set("cards", data);
       console.log("CACHE MISS");
       return data;
     },
