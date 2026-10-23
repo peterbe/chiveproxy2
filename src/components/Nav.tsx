@@ -14,7 +14,7 @@ export function Nav() {
     <nav className={styles.navbar}>
       <ul className={styles.navLinks}>
         <li>
-          <Link to="/" role="button">
+          <Link to="/" role="button" viewTransition>
             Home
           </Link>
         </li>
