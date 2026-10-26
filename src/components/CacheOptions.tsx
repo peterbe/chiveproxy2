@@ -2,7 +2,6 @@ import { useState } from "react";
 import { cardCache } from "../cardCache";
 import buttonStyles from "./Buttons.module.css";
 import styles from "./CacheOptions.module.css";
-import { PrettyPrintDate } from "./PrettyDate";
 
 import type { CacheInfo } from "@/types";
 
@@ -22,11 +21,6 @@ export function CacheOptions({
     <div className={styles.cacheOptions}>
       {data.hit ? (
         <div>
-          <p>
-            This card was served from cache.
-            <br />
-            It was cached at: <PrettyPrintDate date={data.created} />
-          </p>
           <p>
             {isPurged ? (
               <span>Cache Purged</span>
