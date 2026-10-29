@@ -29,8 +29,8 @@ export function useCards() {
         if (typed._cacheInfo) {
           const ageSeconds = (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
           console.log("IT WAS IN THE CACHE", { ageSeconds });
-          if (ageSeconds > 60) {
-            await backgroundRefresh();
+          if (ageSeconds > 10) {
+            void backgroundRefresh();
           }
         } else {
           typed._cacheInfo = { created: new Date().toISOString(), hit: true };
@@ -54,7 +54,7 @@ export function useCards() {
       return data;
     },
     refetchIntervalInBackground: true,
-    refetchInterval: 60 * 5 * 1000, // Refetch every 5 min seconds
+    refetchInterval: 60 * 1000,
     refetchOnWindowFocus: process.env.NODE_ENV !== "production",
   });
 }

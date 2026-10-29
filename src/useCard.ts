@@ -37,7 +37,7 @@ export function useCard(uri: string | number) {
           const ageSeconds = (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
           console.log("IT WAS IN THE CACHE", { ageSeconds });
           if (ageSeconds > 60) {
-            await backgroundRefresh(uri);
+            void backgroundRefresh(uri);
           }
         } else {
           typed._cacheInfo = { created: new Date().toISOString(), hit: true };
