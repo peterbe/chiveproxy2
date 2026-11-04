@@ -33,6 +33,7 @@ export type CardPicture = {
   mp4src: string | null;
   caption: string;
   caption_html: string;
+  transcript: string | null;
 };
 
 export type ServerCard = {

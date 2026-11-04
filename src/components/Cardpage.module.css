@@ -60,3 +60,15 @@
 .cardContent {
   padding: 0 1rem;
 }
+.transcript {
+  text-align: right;
+  button {
+    padding: 3px;
+    font-size: 10px;
+  }
+}
+
+.transcriptText {
+  font-size: 80%;
+  font-style: italic;
+}
