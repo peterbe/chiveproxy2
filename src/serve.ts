@@ -33,6 +33,12 @@ Bun.serve({
         return Response.json(data);
       },
     },
+    "/api/events": {
+      async POST(req) {
+        console.log("POST EVENT.body", await req.text());
+        return Response.json({ ok: true });
+      },
+    },
     "/*": { dir: "./dist" },
   },
 });
