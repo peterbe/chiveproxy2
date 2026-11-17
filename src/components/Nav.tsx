@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router";
 import styles from "./Nav.module.css";
-import { useScrollDetection } from "@/useScrollDetection";
+import { useScrollDetection } from "@/hooks/useScrollDetection";
 
 export function Nav() {
   const navigate = useNavigate();

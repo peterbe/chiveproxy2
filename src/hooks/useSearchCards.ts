@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { wrapCard } from "./wrapImageUrl";
+import { wrapCard } from "../wrapImageUrl";
 
-import type { ServerSearchCards } from "./types";
+import type { ServerSearchCards } from "../types";
 
-export function useSearch(q: string) {
+export function useSearchCards(q: string) {
   return useQuery<ServerSearchCards>({
-    queryKey: ["search", q],
+    queryKey: ["search", "cards", q],
     queryFn: async () => {
-      const res = await fetch(`/api/cards/?search=${encodeURIComponent(q)}`);
+      // const res = await fetch(`/api/cards/?search=${encodeURIComponent(q)}`);
+      const res = await fetch(`/api/cards/?${new URLSearchParams({ search: q })}`);
       if (!res.ok) {
         throw new Error("Failed to fetch cards");
       }

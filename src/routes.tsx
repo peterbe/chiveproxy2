@@ -20,7 +20,11 @@ export const router = createBrowserRouter([
             element: <Homepage />,
           },
           { path: "search", element: <Searchpage /> },
-          { path: ":uri", element: <Cardpage /> },
+          {
+            path: ":uri",
+            element: <Cardpage />,
+            children: [{ path: ":id", element: <Cardpage /> }],
+          },
         ],
       },
     ],

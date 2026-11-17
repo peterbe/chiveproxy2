@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { cardsCache } from "./cardsCache";
-import { wrapCard } from "./wrapImageUrl";
+import { cardsCache } from "../cardsCache";
+import { wrapCard } from "../wrapImageUrl";
 
-import type { ServerCards } from "./types";
+import type { ServerCards } from "../types";
 
 async function backgroundRefresh() {
   const res = await fetch(`/api/cards/`);

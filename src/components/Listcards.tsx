@@ -3,8 +3,8 @@ import { useIntersectionObserver } from "usehooks-ts";
 import styles from "./Listcards.module.css";
 import { PrettyPrintDate } from "./PrettyDate";
 import { PrettyPicture } from "./PrettyPicture";
-import { useImagePreloader } from "./useImagePreloader";
-import { useCard } from "@/useCard";
+import { useCard } from "@/hooks/useCard";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
 import type { Card } from "@/types";
 
@@ -31,7 +31,11 @@ function ArticleCard({ card, preload }: { card: Card; preload: boolean }) {
       {(preload || isIntersecting) && <PreloadCard uri={card.uri} />}
       <h2>
         <Link to={`/${card.uri}`} viewTransition>
-          {card.text}
+          {card.text_headline ? (
+            <span dangerouslySetInnerHTML={{ __html: card.text_headline }} />
+          ) : (
+            card.text
+          )}
         </Link>
       </h2>
       {<small>({card.count_pictures} pictures)</small>}
