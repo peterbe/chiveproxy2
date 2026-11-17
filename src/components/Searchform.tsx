@@ -20,18 +20,15 @@ export function Searchform() {
           console.log({ CURRENT_LOCATION: pathname });
         }
       }}
-      className={styles.searchForm}
     >
-      <div className="grid">
-        <div>
-          <input
-            type="search"
-            placeholder="Search..."
-            value={q}
-            name="search"
-            onChange={(e) => setQ(e.target.value)}
-          />
-        </div>
+      <div className={styles.searchForm}>
+        <input
+          type="search"
+          placeholder="Search..."
+          value={q}
+          name="search"
+          onChange={(e) => setQ(e.target.value)}
+        />
       </div>
     </form>
   );

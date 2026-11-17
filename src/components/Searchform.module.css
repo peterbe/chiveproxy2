@@ -11,3 +11,16 @@
     min-width: 400px;
   }
 }
+
+.picturesList li {
+  clear: both;
+  margin-bottom: 20px;
+  font-size: 80%;
+}
+.picturesList a img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  float: left;
+  margin-right: 10px;
+}

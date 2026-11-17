@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Card404, useCard } from "../useCard";
 import { CacheOptions } from "./CacheOptions";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
+import { Listpictures } from "./Listpictures";
 import { Loading } from "./Loading";
 import { PictureLoadingProgressBar } from "./PictureLoadingProgressBar";
 import { PrettyPrintDate } from "./PrettyDate";
 import { PrettyPicture } from "./PrettyPicture";
-import { PrettyVideo } from "./PrettyVideo";
 import { ReloadAlert } from "./ReloadAlert";
-import { useImagePreloader } from "./useImagePreloader";
-import { useIsSafari } from "./useIsSafari";
-import { useTimedout } from "./useTimedout";
-import { useDocumentTitle } from "@/useDocumentTitle";
+import { Card404, useCard } from "@/hooks/useCard";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useTimedout } from "@/hooks/useTimedout";
 
 import type { CardPicture } from "@/types";
 
 export function Cardpage() {
   const params = useParams();
   const uri = params.uri as string;
+  const id = params.id as string;
 
   const { data, isPending, isLoading, error, refetch } = useCard(uri);
 
@@ -27,12 +27,49 @@ export function Cardpage() {
 
   const showLoading = isPending && !isTimedOut;
 
-  useDocumentTitle(isLoading ? "Loading..." : data?.text ? data.text : "Chive");
-  if (error && error instanceof Card404) {
+  let title = "Chive";
+  if (isLoading) {
+    title = "Loading...";
+  } else if (data?.text) {
+    title = data.text;
+  }
+  useDocumentTitle(title);
+
+  useEffect(() => {
+    if (id) {
+      const html = document.documentElement;
+      html.classList.add("modal-is-open");
+      const dialog = document.querySelector("dialog[open]");
+      if (dialog) {
+        dialog.scrollIntoView();
+      }
+      return () => {
+        html.classList.remove("modal-is-open");
+      };
+    }
+  }, [id]);
+
+  if (
+    (error && error instanceof Card404) ||
+    (id && data && !data.pictures.find((p) => `${p.id}` === id))
+  ) {
     return <Custom404 />;
   }
+
+  const picture = id && data?.pictures.find((p) => `${p.id}` === id);
+
   return (
     <div className={styles.cardpage}>
+      {id && picture && (
+        <dialog open>
+          <article>
+            <header>
+              <button aria-label="Close" rel="prev"></button>
+            </header>
+            <PrettyPicture src={picture?.img} alt={picture?.caption} />
+          </article>
+        </dialog>
+      )}
       {showLoading && <Loading />}
 
       <div className={styles.cardContent}>
@@ -42,7 +79,7 @@ export function Cardpage() {
         {error && <ReloadAlert error={error} />}
       </div>
       {data && <Grid pictures={data.pictures} />}
-      {data && <List pictures={data.pictures} />}
+      {data && <Listpictures uri={uri} pictures={data.pictures} />}
 
       {data && <CacheOptions data={data._cacheInfo} refetch={refetch} uri={uri} />}
     </div>
@@ -82,56 +119,6 @@ function Grid({ pictures }: { pictures: CardPicture[] }) {
           <img src={picture.img} alt={picture.caption} />
         </a>
       ))}
-    </div>
-  );
-}
-
-function List({ pictures }: { pictures: CardPicture[] }) {
-  const [forceVideoTag, setForceVideoTag] = useState(false);
-  const isSafari = useIsSafari();
-
-  const hasSafariVideo = isSafari && pictures.filter((picture) => picture.mp4src).length > 2;
-
-  return (
-    <div className={styles.listPictures}>
-      {pictures.map((picture, i) => (
-        <article key={picture.img} id={`img${i}`}>
-          {picture.mp4src ? (
-            isSafari && !forceVideoTag ? (
-              <PrettyPicture src={picture.mp4src} alt={picture.caption} />
-            ) : (
-              <PrettyVideo src={picture.mp4src} />
-            )
-          ) : (
-            <PrettyPicture src={picture.img} alt={picture.caption} />
-          )}
-          {picture.transcript && <Transcript picture={picture} />}
-
-          <p>{picture.caption}</p>
-        </article>
-      ))}
-
-      {hasSafariVideo && !forceVideoTag && (
-        <button type="button" onClick={() => setForceVideoTag(true)}>
-          Force Video Tag
-        </button>
-      )}
-    </div>
-  );
-}
-function Transcript({ picture }: { picture: CardPicture }) {
-  const [showTranscript, setShowTranscript] = useState(false);
-
-  return (
-    <div className={styles.transcript}>
-      <button
-        type="button"
-        onClick={() => setShowTranscript(!showTranscript)}
-        className="outline secondary"
-      >
-        {showTranscript ? "Hide Transcript" : "Show Transcript"}
-      </button>
-      {showTranscript && <p className={styles.transcriptText}>{picture.transcript}</p>}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { useCards } from "./../useCards";
 import { CacheInfo } from "./CacheInfo";
 import styles from "./Homepage.module.css";
 import { Listcards } from "./Listcards";
@@ -6,8 +5,9 @@ import { Loading } from "./Loading";
 import { Logo } from "./Logo";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
-import { useTimedout } from "./useTimedout";
-import { useDocumentTitle } from "@/useDocumentTitle";
+import { useCards } from "@/hooks/useCards";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useTimedout } from "@/hooks/useTimedout";
 
 export function Homepage() {
   const { data, isPending, error, refetch } = useCards();

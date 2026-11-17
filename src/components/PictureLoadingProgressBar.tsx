@@ -1,5 +1,5 @@
 import styles from "./PictureLoadingProgressBar.module.css";
-import { useTimedout } from "./useTimedout";
+import { useTimedout } from "@/hooks/useTimedout";
 
 export function PictureLoadingProgressBar({
   percent,

@@ -1,10 +1,10 @@
 export type Card = {
   text: string;
+  text_headline?: string;
   img: string;
   url: string;
   id: number;
   created: string;
-  // human_time: string;
   count_pictures: number;
   uri: number;
 };
@@ -28,6 +28,7 @@ export type ServerSearchCards = ServerCards & {
 };
 
 export type CardPicture = {
+  id: number;
   img: string;
   gifsrc: string | null;
   mp4src: string | null;
@@ -42,4 +43,12 @@ export type ServerCard = {
   date: string;
   pictures: CardPicture[];
   _cacheInfo?: CacheInfo;
+};
+
+export type PictureSearch = CardPicture & {
+  card: {
+    id: number;
+    text: string;
+    date: string;
+  };
 };
