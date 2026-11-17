@@ -9,6 +9,7 @@ import { PictureLoadingProgressBar } from "./PictureLoadingProgressBar";
 import { PrettyPrintDate } from "./PrettyDate";
 import { PrettyPicture } from "./PrettyPicture";
 import { ReloadAlert } from "./ReloadAlert";
+import { useSendPageview } from "@/hooks/analytics";
 import { Card404, useCard } from "@/hooks/useCard";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
@@ -34,6 +35,8 @@ export function Cardpage() {
     title = data.text;
   }
   useDocumentTitle(title);
+
+  useSendPageview();
 
   useEffect(() => {
     if (id) {

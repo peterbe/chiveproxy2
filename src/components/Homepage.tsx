@@ -5,6 +5,7 @@ import { Loading } from "./Loading";
 import { Logo } from "./Logo";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
+import { useSendPageview } from "@/hooks/analytics";
 import { useCards } from "@/hooks/useCards";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTimedout } from "@/hooks/useTimedout";
@@ -12,6 +13,8 @@ import { useTimedout } from "@/hooks/useTimedout";
 export function Homepage() {
   const { data, isPending, error, refetch } = useCards();
   useDocumentTitle("Chive");
+
+  useSendPageview();
 
   const isTimedOut = useTimedout(1000);
   const showLoading = isPending && !isTimedOut;
