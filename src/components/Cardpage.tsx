@@ -8,7 +8,9 @@ import { Loading } from "./Loading";
 import { PictureLoadingProgressBar } from "./PictureLoadingProgressBar";
 import { PrettyPrintDate } from "./PrettyDate";
 import { PrettyPicture } from "./PrettyPicture";
+import { PrettyVideo } from "./PrettyVideo";
 import { ReloadAlert } from "./ReloadAlert";
+import { Transcript } from "./Transcript";
 import { useSendPageview } from "@/hooks/analytics";
 import { Card404, useCard } from "@/hooks/useCard";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -81,11 +83,17 @@ export function Cardpage() {
       {id && picture && (
         <dialog open>
           <article>
-            {/* <header>
-
-            </header> */}
             <button aria-label="Close" rel="prev" onClick={onClose}></button>
-            <PrettyPicture src={picture?.img} alt={picture?.caption} />
+
+            {picture.mp4src ? (
+              <PrettyVideo src={picture.mp4src} />
+            ) : (
+              <PrettyPicture src={picture.img} alt={picture.caption} />
+            )}
+
+            {picture.transcript && <Transcript picture={picture} />}
+
+            <p>{picture.caption}</p>
           </article>
         </dialog>
       )}
