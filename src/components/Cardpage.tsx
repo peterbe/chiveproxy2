@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { CacheOptions } from "./CacheOptions";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
@@ -18,6 +18,7 @@ import { useTimedout } from "@/hooks/useTimedout";
 import type { CardPicture } from "@/types";
 
 export function Cardpage() {
+  const navigate = useNavigate();
   const params = useParams();
   const uri = params.uri as string;
   const id = params.id as string;
@@ -37,6 +38,20 @@ export function Cardpage() {
   useDocumentTitle(title);
 
   useSendPageview();
+
+  const onClose = useCallback(() => {
+    void navigate(`/${uri}`);
+  }, [navigate, uri]);
+
+  useEffect(() => {
+    const close = (e: { key: string }) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [onClose]);
 
   useEffect(() => {
     if (id) {
@@ -66,9 +81,10 @@ export function Cardpage() {
       {id && picture && (
         <dialog open>
           <article>
-            <header>
-              <button aria-label="Close" rel="prev"></button>
-            </header>
+            {/* <header>
+
+            </header> */}
+            <button aria-label="Close" rel="prev" onClick={onClose}></button>
             <PrettyPicture src={picture?.img} alt={picture?.caption} />
           </article>
         </dialog>
