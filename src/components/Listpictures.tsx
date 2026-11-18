@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import styles from "./Cardpage.module.css";
 import { PrettyPicture } from "./PrettyPicture";
 import { PrettyVideo } from "./PrettyVideo";
+import { Transcript } from "./Transcript";
 import { useIsSafari } from "@/hooks/useIsSafari";
 
 import type { CardPicture, PictureSearch } from "@/types";
@@ -26,7 +27,7 @@ export function Listpictures({
         return (
           <article key={picture.img} id={`img${i}`}>
             {picture.id && (
-              <Link to={`/${thisUri}/${picture.id}`}>
+              <Link to={`/${thisUri}/${picture.id}`} replace>
                 {picture.mp4src ? (
                   isSafari && !forceVideoTag ? (
                     <PrettyPicture src={picture.mp4src} alt={picture.caption} />
@@ -66,23 +67,6 @@ export function Listpictures({
           Force Video Tag
         </button>
       )}
-    </div>
-  );
-}
-
-function Transcript({ picture }: { picture: CardPicture }) {
-  const [showTranscript, setShowTranscript] = useState(false);
-
-  return (
-    <div className={styles.transcript}>
-      <button
-        type="button"
-        onClick={() => setShowTranscript(!showTranscript)}
-        className="outline secondary"
-      >
-        {showTranscript ? "Hide Transcript" : "Show Transcript"}
-      </button>
-      {showTranscript && <p className={styles.transcriptText}>{picture.transcript}</p>}
     </div>
   );
 }
