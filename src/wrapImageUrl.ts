@@ -1,4 +1,4 @@
-import type { Card, CardPicture } from "./types";
+import type { CardPicture } from "./types";
 
 const wrapImageUrl = (url: string) => {
   const sp = new URLSearchParams({ url, redirect_to_file: "true" });
@@ -14,7 +14,7 @@ export const wrapPicture = (picture: CardPicture) => {
   }
 };
 
-export const wrapCard = (picture: Card) => {
+export const wrapCard = (picture: { img: string }) => {
   if (picture.img.startsWith("https://thechive.com")) {
     picture.img = wrapImageUrl(picture.img);
   }

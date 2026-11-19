@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { wrapPicture } from "../wrapImageUrl";
+import { wrapCard, wrapPicture } from "../wrapImageUrl";
 
 import type { CardPicture, PictureSearch } from "../types";
 
@@ -24,6 +24,10 @@ export function useSearchPictures(q: string) {
       const data = (await response.json()) as ServerSearchResponse;
       for (const picture of data.pictures) {
         wrapPicture(picture as CardPicture);
+        if ("card" in picture && picture.card.img) {
+          const card = picture.card;
+          wrapCard(card as { img: string });
+        }
       }
       return data;
     },

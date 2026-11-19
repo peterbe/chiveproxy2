@@ -50,5 +50,6 @@ export type PictureSearch = CardPicture & {
     id: number;
     text: string;
     date: string;
+    img?: string;
   };
 };
