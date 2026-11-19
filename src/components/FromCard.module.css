@@ -1,0 +1,13 @@
+.row {
+  display: flex;
+  gap: 6px;
+}
+
+.col-fixed {
+  flex: 0 0 150px; /* don't grow, don't shrink, base width 150px */
+}
+
+.col-fluid {
+  flex: 1 1 auto; /* take up all remaining space */
+  min-width: 0; /* lets long content shrink instead of overflowing */
+}

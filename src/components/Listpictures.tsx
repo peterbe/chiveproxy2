@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import styles from "./Cardpage.module.css";
+import { FromCard } from "./FromCard";
 import { PrettyPicture } from "./PrettyPicture";
 import { PrettyVideo } from "./PrettyVideo";
 import { Transcript } from "./Transcript";
@@ -58,6 +59,11 @@ export function Listpictures({
             {picture.transcript && <Transcript picture={picture} />}
 
             <p>{picture.caption}</p>
+            {"card" in picture && (
+              <footer>
+                <FromCard picture={picture} />
+              </footer>
+            )}
           </article>
         );
       })}
