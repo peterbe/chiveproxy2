@@ -82,7 +82,7 @@ export function Cardpage() {
     <div className={styles.cardpage}>
       {id && picture && (
         <dialog open>
-          <article>
+          <article className={styles.modalArticle}>
             <button aria-label="Close" rel="prev" onClick={onClose}></button>
 
             {picture.mp4src ? (
