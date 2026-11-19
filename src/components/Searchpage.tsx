@@ -5,6 +5,7 @@ import { Listpictures } from "./Listpictures";
 import { Loading } from "./Loading";
 import { ReloadAlert } from "./ReloadAlert";
 import { Searchform } from "./Searchform";
+import styles from "./Searchpage.module.css";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useSearchCards } from "@/hooks/useSearchCards";
 import { useSearchPictures } from "@/hooks/useSearchPictures";
@@ -30,8 +31,8 @@ export function Searchpage() {
     <div>
       {cardSearch.error && <ReloadAlert error={cardSearch.error} />}
       <Searchform />
-      <fieldset>
-        <legend>Search:</legend>
+      <fieldset className={styles.typeSelection}>
+        {/* <legend>Search:</legend> */}
         <input
           type="radio"
           id="id_cards"
@@ -54,32 +55,9 @@ export function Searchpage() {
           Pictures
           {pictureSearch.data && ` (${pictureSearch.data.pictures.length})`}
         </label>
-        {/* <input
-          type="radio"
-          id="id_both"
-          name="search-on"
-          checked={searchOn === "both"}
-          onChange={() => setSearchOn("both")}
-        />
-        <label htmlFor="id_both">
-          Both
-          {cardSearch.data &&
-            pictureSearch.data &&
-            ` (${(cardSearch.data.search.count ?? 0) + (pictureSearch.data?.pictures.length ?? 0)})`}
-        </label> */}
       </fieldset>
       {showLoading && <Loading />}
-      {/* {cardSearch.data && (
-        <p className={styles.searchCount}>
-          Found {cardSearch.data.search.count} card{cardSearch.data.search.count !== 1 ? "s" : ""}.
-        </p>
-      )} */}
-      {/* {pictureSearch.data && (
-        <p className={styles.searchCount}>
-          Found {pictureSearch.data.pictures.length} picture
-          {pictureSearch.data.pictures.length !== 1 ? "s" : ""}.
-        </p>
-      )} */}
+
       {cardSearch.data && searchOn === "cards" && (
         <Listcards cards={cardSearch.data.cards} preloadCards={1} />
       )}
