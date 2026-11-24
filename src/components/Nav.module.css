@@ -1,7 +1,7 @@
 .navbar {
-  position: sticky; /* Pins the element during scroll */
-  top: 0; /* Sticks exactly at the top boundary */
-  z-index: 1000; /* Keeps the navbar on top of body content */
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   /* Visual styling */
   display: flex;
@@ -16,41 +16,4 @@
   list-style: none;
   display: flex;
   gap: 20px;
-
-  /* a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.6rem 1rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition:
-      background-color 0.2s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  a.standardButton {
-    background: #1e88e5;
-    color: #fff;
-  }
-
-  a.reloadButton {
-    background: #43a047;
-    color: #fff;
-  }
-  a.homeButton {
-    background: #1e88e5;
-    color: #fff;
-  }
-
-  a:hover {
-    background: #1565c0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  } */
 }

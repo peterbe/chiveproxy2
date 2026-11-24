@@ -60,11 +60,3 @@
 .cardContent {
   padding: 0 1rem;
 }
-
-.modalArticle {
-  padding-top: 20px;
-  button[rel="prev"] {
-    margin-top: -10px;
-    margin-bottom: 10px;
-  }
-}
