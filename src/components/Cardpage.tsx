@@ -1,16 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { CacheOptions } from "./CacheOptions";
+import { Cardmodal } from "./Cardmodal";
 import styles from "./Cardpage.module.css";
 import { Custom404 } from "./Errorpage";
 import { Listpictures } from "./Listpictures";
 import { Loading } from "./Loading";
 import { PictureLoadingProgressBar } from "./PictureLoadingProgressBar";
 import { PrettyPrintDate } from "./PrettyDate";
-import { PrettyPicture } from "./PrettyPicture";
-import { PrettyVideo } from "./PrettyVideo";
 import { ReloadAlert } from "./ReloadAlert";
-import { Transcript } from "./Transcript";
 import { useSendPageview } from "@/hooks/analytics";
 import { Card404, useCard } from "@/hooks/useCard";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -20,7 +18,6 @@ import { useTimedout } from "@/hooks/useTimedout";
 import type { CardPicture } from "@/types";
 
 export function Cardpage() {
-  const navigate = useNavigate();
   const params = useParams();
   const uri = params.uri as string;
   const id = params.id as string;
@@ -40,20 +37,6 @@ export function Cardpage() {
   useDocumentTitle(title);
 
   useSendPageview();
-
-  const onClose = useCallback(() => {
-    void navigate(`/${uri}`);
-  }, [navigate, uri]);
-
-  useEffect(() => {
-    const close = (e: { key: string }) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, [onClose]);
 
   useEffect(() => {
     if (id) {
@@ -80,23 +63,7 @@ export function Cardpage() {
 
   return (
     <div className={styles.cardpage}>
-      {id && picture && (
-        <dialog open>
-          <article className={styles.modalArticle}>
-            <button aria-label="Close" rel="prev" onClick={onClose}></button>
-
-            {picture.mp4src ? (
-              <PrettyVideo src={picture.mp4src} />
-            ) : (
-              <PrettyPicture src={picture.img} alt={picture.caption} />
-            )}
-
-            {picture.transcript && <Transcript picture={picture} />}
-
-            <p>{picture.caption}</p>
-          </article>
-        </dialog>
-      )}
+      {id && picture && <Cardmodal uri={uri} picture={picture} />}
       {showLoading && <Loading />}
 
       <div className={styles.cardContent}>

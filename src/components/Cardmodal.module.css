@@ -1,0 +1,15 @@
+.modalArticle {
+  padding-top: 20px;
+  button[rel="prev"] {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
