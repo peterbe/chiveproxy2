@@ -1,22 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { cardCache } from "../cardCache";
 import { wrapPicture } from "../wrapImageUrl";
+import { CARD_CACHE_MAX_AGE } from "@/constants";
 
 import type { ServerCard } from "../types";
-
-async function backgroundRefresh(uri: string | number) {
-  const res = await fetch(`/api/cards/${uri}/`);
-  if (!res.ok) {
-    console.error("Failed to fetch card in background", uri);
-  } else {
-    const data = (await res.json()) as ServerCard;
-    for (const picture of data.pictures) {
-      wrapPicture(picture);
-    }
-    data._cacheInfo = { created: new Date().toISOString(), hit: false };
-    cardCache.set(`card:${uri}`, data);
-  }
-}
 
 export class Card404 extends Error {
   constructor(message: string) {
@@ -29,22 +15,6 @@ export function useCard(uri: string | number) {
   return useQuery<ServerCard>({
     queryKey: ["card", uri],
     queryFn: async () => {
-      const cached = cardCache.get(`card:${uri}`);
-      if (cached) {
-        console.log("CACHE HIT", uri);
-        const typed = cached as ServerCard;
-        if (typed._cacheInfo) {
-          const ageSeconds = (Date.now() - new Date(typed._cacheInfo.created).getTime()) / 1000;
-          console.log("IT WAS IN THE CACHE", { ageSeconds });
-          if (ageSeconds > 60) {
-            void backgroundRefresh(uri);
-          }
-        } else {
-          typed._cacheInfo = { created: new Date().toISOString(), hit: true };
-        }
-        typed._cacheInfo.hit = true;
-        return typed;
-      }
       const res = await fetch(`/api/cards/${uri}/`);
       if (!res.ok) {
         if (res.status === 404) {
@@ -56,13 +26,15 @@ export function useCard(uri: string | number) {
       for (const picture of data.pictures) {
         wrapPicture(picture);
       }
-      data._cacheInfo = { created: new Date().toISOString(), hit: false };
-      cardCache.set(`card:${uri}`, data);
-      console.log("CACHE MISS", uri);
       return data;
     },
     refetchOnWindowFocus: process.env.NODE_ENV !== "production",
-    staleTime: 1000 * 60 * 5,
+    // If the card is already cached (in memory or restored from
+    // localStorage) and is less than a day old, don't re-fetch it.
+    staleTime: 1000 * 60 * 60 * 24, // 1 day
+    // Must be >= the persister's maxAge, otherwise queries are garbage
+    // collected (and dropped from localStorage) before they expire.
+    gcTime: CARD_CACHE_MAX_AGE,
     retry: 2,
   });
 }
