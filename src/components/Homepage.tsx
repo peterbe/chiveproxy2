@@ -1,4 +1,3 @@
-import { CacheInfo } from "./CacheInfo";
 import styles from "./Homepage.module.css";
 import { Listcards } from "./Listcards";
 import { Loading } from "./Loading";
@@ -11,7 +10,7 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useTimedout } from "@/hooks/useTimedout";
 
 export function Homepage() {
-  const { data, isPending, error, refetch } = useCards();
+  const { data, isPending, error } = useCards();
   useDocumentTitle("Chive");
 
   useSendPageview();
@@ -27,7 +26,7 @@ export function Homepage() {
       {data && <Searchform />}
       {showLoading && <Loading />}
       {data && <Listcards cards={data.cards} preloadCards={3} />}
-      {data && <CacheInfo refetch={refetch} />}
+      {/* {data && <CacheInfo refetch={refetch} />} */}
     </div>
   );
 }
